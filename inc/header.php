@@ -4,11 +4,7 @@
         <div class="sticky-header main-bar-wraper navbar-expand-lg">
             <div class="main-bar clearfix">
                 <div class="container clearfix">
-                    <!-- Website Logo -->
-                    <div class="logo-header mostion">
-						<a href="index-2.html" class="logo"><img src="assets/homepage/images/logo.png" alt=""></a>
-						<a href="index-2.html" class="logo-white"><img src="assets/homepage/images/logo-white.png" alt=""></a>
-					</div>
+             
                     <!-- Nav Toggle Button -->
                     <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 						<span></span>
@@ -22,8 +18,8 @@
 								<input type="checkbox">
 								<span class="mode-label"></span>
 							</a>
-                            <a href="register-2.html" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
-							<a href="javascript:void(0);" title="READ MORE" rel="bookmark" data-toggle="modal" data-target="#car-details" class="site-button"><i class="fa fa-lock"></i> login </a>
+                            <a href="signup" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
+							<a href="login" class="site-button"><i class="fa fa-lock"></i> login </a>
                         </div>
                     </div>
                     <!-- Main Nav -->

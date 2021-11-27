@@ -9,9 +9,9 @@
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
 	<meta name="robots" content="" />
-	<meta name="description" content="Job Board - Job Portal HTML Template + RTL and Dark layout" />
-	<meta property="og:title" content="Job Board - Job Portal HTML Template + RTL and Dark layout" />
-	<meta property="og:description" content="Job Board - Job Portal HTML Template + RTL and Dark layout" />
+	<meta name="description" content="Lost and found" />
+	<meta property="og:title" content="Lost and found" />
+	<meta property="og:description" content="Lost and found" />
 	<meta property="og:image" content="social-image.png" />
 	<meta name="format-detection" content="telephone=no">
 	
@@ -20,7 +20,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 	
 	<!-- PAGE TITLE HERE -->
-	<title>Job Board - Job Portal HTML Template + RTL and Dark layout</title>
+	<title>Lost and found :: Find your document</title>
 
 	<!-- MOBILE SPECIFIC -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">

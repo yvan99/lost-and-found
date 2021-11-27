@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/cdh/server/core/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
 
 // connecting to DB
 

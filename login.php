@@ -1,4 +1,18 @@
 <?php require 'inc/css.php' ?>
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
+if(isset($_POST['login'])){
+	
+	$email=$_POST['email'];
+	$password=$_POST['password'];
+
+
+$client = new client();
+
+$result=$client->signin($email,$password);
+
+}
+?>
 <body id="bg">
 <div class="page-wraper">
 <div id="loading-area"></div>
@@ -26,22 +40,23 @@
 					<div class="col-lg-6 col-md-6">
 						<div class="login-2 submit-resume p-a30 seth">
 							<div class="tab-content nav">
-								<form id="login" class="tab-pane active col-12 p-a0 ">
+								<form id="login" class="tab-pane active col-12 p-a0 " method="POST">
 									<p class="font-weight-600">If you have an account with us, please log in.</p>
 									<div class="form-group">
+										<?php echo @$result;?>
 										<label>E-Mail Address*</label>
 										<div class="input-group">
-											<input name="dzName" required="" class="form-control" placeholder="Your Email Address" type="email">
+											<input name="email" required="" class="form-control" placeholder="Your Email Address" type="email">
 										</div>
 									</div>
 									<div class="form-group">
 										<label>Password *</label>
 										<div class="input-group">
-											<input name="dzName" required="" class="form-control " placeholder="Type Password" type="password">
+											<input name="password" required="" class="form-control " placeholder="Type Password" type="password">
 										</div>
 									</div>
 									<div class="text-center">
-										<button class="site-button float-left">login</button>
+										<button class="site-button float-left"name="login">login</button>
 										<a data-toggle="tab" href="#forgot-password" class="site-button-link forget-pass m-t15 float-right"><i class="fa fa-unlock-alt"></i> Forgot Password</a> 
 									</div>
 								</form>

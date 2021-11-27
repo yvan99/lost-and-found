@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/cdh/server/core/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
 function insert($table,$dataStructure,$values,$data){
 
   $sql = "INSERT INTO $table ($dataStructure) VALUES 

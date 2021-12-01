@@ -742,6 +742,14 @@ dl dd {
 .m-t70 {
   margin-top: 70px;
 }
+
+.m-t70plus {
+  margin-top: -70px !important;
+}
+
+.m-t30plus {
+  margin-top: -30px !important;
+}
 .m-t80 {
   margin-top: 80px;
 }
@@ -1804,7 +1812,7 @@ label {
   margin-bottom: 25px;
 }
 .form-control {
-    border: 1px solid #000316;
+  border: 1px solid #ced4da !important;
   
   box-shadow: none;
   font-size: 14px;

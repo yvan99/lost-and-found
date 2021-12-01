@@ -1,4 +1,6 @@
-<?php require 'inc/css.php' ?>
+<?php require 'inc/css.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
+?>
 <body id="bg">
 <div id="loading-area"></div>
 <div class="page-wraper">
@@ -18,10 +20,8 @@
 									<div class="form-group">
 										<label>Search your Document</label>
 										<div class="input-group">
-											<input type="text" class="form-control" placeholder="">
-											<div class="input-group-append">
-												<span class="input-group-text"><i class="fa fa-search"></i></span>
-											</div>
+											<input type="text" class="form-control" placeholder="" style="border:none !important;">
+
 										</div>
 									</div>
 								</div>
@@ -86,16 +86,20 @@
 					</div>
 				</div>
 				<div class="row sp20">
+					<?php 
+					$categoryFetcher  =  select('*','document_type',"1");
+					foreach ($categoryFetcher  as $category) :
+					?>
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="icon-bx-wraper">
 							<div class="icon-content">
-								<div class="icon-md text-primary m-b20"><i class="ti-location-pin"></i></div>
-								<a href="category" class="dez-tilte">Design, Art & Multimedia</a>
-								<p class="m-a0">198 Open Positions</p>
+								<a href="category" class="dez-tilte"><?php echo $category['doctype_name'] ?></a>
+								<!-- <p class="m-a0">198 Open Positions</p> -->
 								<div class="rotate-icon"><i class="ti-location-pin"></i></div> 
 							</div>
 						</div>				
 					</div>
+					<?php endforeach ?>
 		
 
 					<div class="col-lg-12 text-center m-t30">

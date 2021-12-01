@@ -34,12 +34,13 @@
 
 							</li>
 							<li>
-								<a href="javascript:void(0);">About</a>
+								<a href="javascript:void(0);">Browse Documents category</a>
 
 							</li>
 
+
 							<li>
-								<a href="javascript:void(0);">Documents category</a>
+								<a href="documentreport">Report document</a>
 
 							</li>
 

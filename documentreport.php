@@ -1,4 +1,5 @@
 <?php require 'inc/css.php';
+session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
 ?>
 
@@ -14,6 +15,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                     <h1>Report document</h1>
                     <p>Complete Your Steps</p>
                 </div> -->
+                						
+							<?php
+							$session=$_SESSION['clientIdLost'];
+							if (isset($session)) {
+                                $mess = '';
+                            }
+                            else{
+                                $mess = 'none';
+                            }
+							?>
+
                 <div class="job-bx max-w800 m-auto">
                     <div class="row">
                         <div class="col-lg-6 m-tb10">
@@ -24,7 +36,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Lost document</h6>
                                     <p class="m-b20">I have at least 1 month of work experience</p>
-                                    <a href="reportlost" class="site-button">Report Now</a>
+                                    <a href="reportlost" class="site-button" style="display: <?php echo $mess; ?> ;">Report Now</a>
                                 </div>
                             </div>
                         </div>
@@ -36,7 +48,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Found a document</h6>
                                     <p class="m-b20">I have just graduated/I haven't worked after graduation</p>
-                                    <a href="account-fresher.html" class="site-button">Report now</a>
+                                    <a href="account-fresher.html" class="site-button" style="display: <?php echo $mess; ?> ;">Report now</a>
                                 </div>
                             </div>
                         </div>

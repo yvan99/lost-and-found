@@ -95,7 +95,7 @@ class client{
 
       //from here we are sure that email are registered
 
-      $rows = select('*', 'client', "cli_email='$email' and cli_status = 0 ");
+      $rows = select('*', 'client', "cli_email='$email' and cli_status = 1 ");
       $hash = null;
 
 
@@ -110,8 +110,10 @@ class client{
       $log = verify_password($password, $hash);
       if ($log) {
         $log;
-        create_session($id, 'client');
-        return true;
+        session_start();
+      $_SESSION['clientIdLost']=$id;
+       // create_session($id, 'client');
+       header('location:./');
       } else{
         $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
         <strong> Invalid credentials , try again </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">

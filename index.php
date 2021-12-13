@@ -1,5 +1,7 @@
 <?php require 'inc/css.php';
+session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
+
 ?>
 <body id="bg">
 <div id="loading-area"></div>

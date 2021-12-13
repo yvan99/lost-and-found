@@ -15,15 +15,15 @@ function resetpasswordmail($userEmail,$userBody,$userSubject)
               //Server settings
               $mail->SMTPDebug = 1;                                 // Enable verbose debug output
               $mail->isSMTP();                                      // Set mailer to use SMTP
-              $mail->Host = 'sg2plzcpnl453271.prod.sin2.secureserver.net';  // Specify main and backup SMTP servers
+              $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
               $mail->SMTPAuth = true;                               // Enable SMTP authentication
-              $mail->Username = 'quotation@securisafrica.net';                 // SMTP username
-              $mail->Password = 'uYZtB1hqRcjL';                           // SMTP password
-              $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-              $mail->Port = 587;                                    // TCP port to connect to
+              $mail->Username ='emateduc250@gmail.com';                 // SMTP username
+              $mail->Password = 'Emate250@git';                           // SMTP password
+              $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                              // Enable TLS encryption, `ssl` also accepted
+              $mail->Port = 465;                                    // TCP port to connect to
 
               //Recipients
-              $mail->setFrom('quotation@securisafrica.net', 'lost and found');
+              $mail->setFrom('emateduc250@gmail.com', 'lost and found');
               $mail->addAddress($userEmail);     // Add a recipient
               $body=$userBody;
 
@@ -34,10 +34,10 @@ function resetpasswordmail($userEmail,$userBody,$userSubject)
               $mail->AltBody = strip_tags($body);
 
               $mail->send();
-              echo 'Message has been sent';
+             // echo 'Message has been sent';
               
           } catch (Exception $e) {
-              echo 'Message could not be sent.';
-              echo 'Mailer Error: ' . $mail->ErrorInfo;
+             // echo 'Message could not be sent.';
+             // echo 'Mailer Error: ' . $mail->ErrorInfo;
           }
 }

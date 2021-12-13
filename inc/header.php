@@ -20,7 +20,8 @@
 							</a>
 						
 							<?php
-							$session=$_SESSION['clientIdLost'];
+						
+							@$session=$_SESSION['clientIdLost'];
 							if (isset($session)) {
 								$selectUser =select('*','client',"cli_id='$session'");
 								foreach ($selectUser as $user) {

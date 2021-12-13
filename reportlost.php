@@ -1,6 +1,8 @@
 <?php require 'inc/css.php';
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
+@$user =$_SESSION['clientIdLost']; 
+
 ?>
 
 <body id="bg">
@@ -20,11 +22,31 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                         <div class="job-bx">
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <form class="job-alert-bx">
+                                    <?php 
+                                    if (isset($_POST['reportLost'])) {
+                                        @$repoName = escape($_POST['docName']);  
+                                        @$repoId   = escape($_POST['docId']);  
+                                        @$repoType = escape($_POST['docType']);  
+                                        @$repoAddress = escape($_POST['docAddress']);  
+                                        @$repoDate    = escape($_POST['docDate']);
+                                        @$repoAgree = $_POST['docAgree'];
+                                        if (empty($repoName) || empty($repoId)||empty($repoType||empty($repoAddress)||empty($repoDate) || empty($repoAgree))) {
+                                          echo $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                          <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">×</span>
+                                          </button>
+                                      </div>';
+                                      }
+                                      else{
+                                         echo reportLost($repoName,$repoId,$repoType,$repoAddress,$repoDate,$user);
+                                        }
+                                      }
+                                    ?>
+                                    <form class="job-alert-bx" method="POST">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label>Document Name</label>
+                                                    <label>Document Owner Name</label>
                                                     <input class="form-control" type="text" name="docName">
                                                 </div>
                                             </div>
@@ -67,13 +89,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="job-alert-check" name="docAgree">
+                                                        <input type="checkbox"  class="custom-control-input" id="job-alert-check" name="docAgree">
                                                         <label class="custom-control-label" for="job-alert-check">I agree to the Terms and Conditions and Privacy Policy</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">
-                                                <button class="site-button"  type="submit" name="reportLosted">Report Now</button>
+                                                <a href="./" class="btn btn-dark">Return home</a>
+                                                <button class="site-button"  type="submit" name="reportLost">Report Now</button>
                                             </div>
                                         </div>
                                     </form>

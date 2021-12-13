@@ -17,7 +17,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                 </div> -->
                 						
 							<?php
-							$session=$_SESSION['clientIdLost'];
+							@$session=$_SESSION['clientIdLost'];
 							if (isset($session)) {
                                 $mess = '';
                             }

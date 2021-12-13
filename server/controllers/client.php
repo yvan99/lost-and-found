@@ -233,6 +233,44 @@ class client{
   {
   }
 
+  function reportLost($repoName,$repoId,$repoType,$repoAddress,$repoDate,$user){
+
+    $countSimilar = countAffectedRows('document_found',"	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+    $countDocId   = countAffectedRows('document_lost',"	doc_serialcode='$repoId' LIMIT 1" );
+    if ($countSimilar) {
+  return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+  </button>
+</div>';
+}
+elseif ($countDocId) {
+  return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+  </button>
+</div>';
+}
+elseif (!$countSimilar && !$countDocId) {
+  $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
+  $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
+  $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
+  insert('document_lost', $datastracture, $values, $data);
+  return 	'<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+  </button>
+</div>';
+}
+else{
+  return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+  </button>
+</div>';
+}
+  }
+
 
 
 

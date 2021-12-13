@@ -48,7 +48,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Found a document</h6>
                                     <p class="m-b20">I have just graduated/I haven't worked after graduation</p>
-                                    <a href="account-fresher.html" class="site-button" style="display: <?php echo $mess; ?> ;">Report now</a>
+                                    <a href="reportfound" class="site-button" style="display: <?php echo $mess; ?> ;">Report now</a>
                                 </div>
                             </div>
                         </div>

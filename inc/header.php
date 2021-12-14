@@ -18,17 +18,18 @@
 								<input type="checkbox">
 								<span class="mode-label"></span>
 							</a>
-						
+
 							<?php
-						
-							@$session=$_SESSION['clientIdLost'];
+
+							@$session = $_SESSION['clientIdLost'];
 							if (isset($session)) {
-								$selectUser =select('*','client',"cli_id='$session'");
+								$selectUser = select('*', 'client', "cli_id='$session'");
 								foreach ($selectUser as $user) {
 									# code...
 								}
 							?>
-								<button class="site-button"><?php echo strtoupper($user['cli_fname'].' '.$user['cli_lname'] )?></button>
+								<button class="site-button"><?php echo strtoupper($user['cli_fname'] . ' ' . $user['cli_lname']) ?></button>
+								<a class="site-button" href="logout">Logout</a>
 							<?php } else { ?>
 								<a href="signup" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
 								<a href="login" class="site-button"><i class="fa fa-lock"></i> Login</a>
@@ -49,16 +50,30 @@
 								<a href="./">Home</a>
 
 							</li>
+
 							<li>
+								<a href="./">about</a>
+
+							</li>
+							<!-- <li>
 								<a href="javascript:void(0);">Browse Documents category</a>
 
-							</li>
+							</li> -->
+							<?php
+							if ($session) {
 
+							?>
 
-							<li>
-								<a href="documentreport">Report document</a>
+								<li>
+									<a href="documentreport">Report document</a>
 
-							</li>
+								</li>
+
+								<li>
+									<a href="myreports">My reports</a>
+
+								</li>
+							<?php } ?>
 
 
 						</ul>

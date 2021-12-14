@@ -20,7 +20,27 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                         <div class="job-bx">
                             <div class="row">
                                 <div class="col-lg-8">
-                                    <form class="job-alert-bx">
+                                    <?php
+                                    if (isset($_POST['reportFound'])) {
+                                        $folder  = 'access/files/';
+                                        @$repoName = escape($_POST['docName']);
+                                        @$repoId   = escape($_POST['docId']);
+                                        @$repoType = escape($_POST['docType']);
+                                        @$repoLocation = escape($_POST['docLoc']);
+                                        @$file    = $_FILES["docPhoto"]["name"];
+                                        @$tmp     = $_FILES['docPhoto']['tmp_name'];
+                                        if (empty($repoName) || empty($file)|| empty($repoId) || empty($repoType) || empty($repoLocation) || empty($file)) {
+                                            echo $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                          <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                              <span aria-hidden="true">×</span>
+                                          </button>
+                                      </div>';
+                                        } else {
+                                            echo reportFound($tmp,$file,$folder,$repoName, $repoId, $repoType, $repoLocation, $user);
+                                        }
+                                    }
+                                    ?>
+                                    <form class="job-alert-bx" method='POST' enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
@@ -54,7 +74,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label>What is near by location?</label>
-                                                    <select name="docType">
+                                                    <select name="docLoc">
                                                         <option selected disabled>Select location</option>
                                                         <?php $sel = select('*', 'branch', '1');
                                                         foreach ($sel as $cate) :
@@ -67,10 +87,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label>Upload scanned document</label>
-                                                    <input class="form-control" placeholder="DAY/MONTH/YEAR" type="file" name="docDate">
+                                                    <input type="file" name="docPhoto" class="form-control">
                                                 </div>
                                             </div>
-                                       
+
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
@@ -80,7 +100,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">
-                                                <button class="site-button"  type="submit" name="reportLosted">Report Now</button>
+                                                <button class="site-button" type="submit" name="reportFound">Report Now</button>
                                             </div>
                                         </div>
                                     </form>
@@ -110,7 +130,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
         </div>
         <!-- Create Account END -->
         <?php require 'inc/footer.php' ?>
-    <!-- scroll top button -->
-    <button class="scroltop fa fa-arrow-up" ></button>
-</div>
-        <?php require 'inc/js.php';
+        <!-- scroll top button -->
+        <button class="scroltop fa fa-arrow-up"></button>
+    </div>
+    <?php require 'inc/js.php';

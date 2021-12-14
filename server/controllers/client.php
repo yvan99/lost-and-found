@@ -111,8 +111,8 @@ class client{
       if ($log) {
         $log;
         session_start();
-      $_SESSION['clientIdLost']=$id;
-       // create_session($id, 'client');
+      //$_SESSION['clientIdLost']=$id;
+        create_session($id, 'clientIdLost');
        header('location:./');
       } else{
         $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -270,10 +270,44 @@ else{
 </div>';
 }
   }
-
-
-
-
-
-
+  function reportFound($tmp,$file,$folder,$repoName, $repoId, $repoType, $repoLocation, $user){
+    $repoDate = date('d/m/Y');
+    $countSimilar = countAffectedRows('document_lost',"	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+    $countDocId   = countAffectedRows('document_found',"	doc_serialcode='$repoId' LIMIT 1" );
+    if ($countSimilar) {
+      return 	'<div class="alert alert-info alert-dismissible fade show" role="alert">
+      <strong> We found similar document </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+    </div>';
+    }
+    elseif ($countDocId) {
+      return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+    </div>';
+    }
+    elseif (!$countSimilar && !$countDocId) {
+      $file1 = returnMixtring().$file;
+      $path= $folder . $file1;
+      $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'photo' => $file1,'branch'=>$repoLocation];
+      $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_photo`, `bra_id`';
+      $values = ':id,:type,:code,:names,:founder,:status,:date,:photo,:branch';
+      insert('document_found', $datastracture, $values, $data);
+      move_uploaded_file($tmp, $path);
+      return 	'<div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+    </div>';
+    }
+    else{
+      return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+    </div>';
+    }
+  }
 ?>

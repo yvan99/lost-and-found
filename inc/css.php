@@ -44,5 +44,57 @@
 	<link rel="preconnect" href="assets/homepage/fonts.gstatic.com/index.html" crossorigin>
 	<link href="assets/homepage/fonts.googleapis.com/css25e9c.css?family=Lato:wght@100;300;400;700;900&amp;family=Montserrat:wght@100;200;300;400;500;600;700;800;900&amp;family=Roboto:wght@100;300;400;500;700;900&amp;family=Rubik:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
 
+<style>
+	
+.loding_txt {
+    background-image: url(../images/gif/ajax-loader.gif);
+    background-position: left;
+    background-repeat: no-repeat;
+    border: 0;
+    display: inline-block;
+    height: 16px;
+    padding-left: 20px;
+}
 
+/* search box */
+#country-list{
+    float:right;
+    list-style:none;
+    margin-top:50px !important;
+    margin-left: -600px;
+    padding:0;
+    width: fit-content;
+    width:600px;
+    position: absolute;
+    z-index: 10;
+    border: none !important;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow:
+  0.9px 3.3px 11.6px rgba(0, 0, 0, 0.034),
+  2.2px 7.8px 26.9px rgba(0, 0, 0, 0.049),
+  3.9px 13.9px 48.4px rgba(0, 0, 0, 0.06),
+  6.4px 23.1px 80.3px rgba(0, 0, 0, 0.07),
+  10.6px 38.1px 132.3px rgba(0, 0, 0, 0.081),
+  18.5px 66.6px 231.2px rgba(0, 0, 0, 0.096),
+  40px 144px 500px rgba(0, 0, 0, 0.13)
+;
+
+}
+.searchProd{
+max-width: 300px !important;
+}
+.trs{
+    border: none !important;
+}
+.tds{
+    border: none !important;
+}
+.tds a{
+    color: #000 !important;
+}
+.trs:hover{
+    background-color: #f1f1f1 !important;
+}
+</style>
 </head>

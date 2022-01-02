@@ -12,12 +12,12 @@
 						<span></span>
 					</button>
 					<!-- Extra Nav -->
-					<div class="extra-nav">
+					<div class="extra-nav" >
 						<div class="extra-cell">
-							<a href="javascript:void(0);" class="layout-btn">
+							<!-- <a href="javascript:void(0);" class="layout-btn">
 								<input type="checkbox">
 								<span class="mode-label"></span>
-							</a>
+							</a> -->
 
 							<?php
 

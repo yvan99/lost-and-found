@@ -1,12 +1,10 @@
 <?php require 'inc/css.php';
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
-@$user =$_SESSION['clientIdLost']; 
+require 'inc/server.php';
 
 ?>
 
 <body id="bg">
-    <div id="loading-area"></div>
+    <!-- <div id="loading-area"></div> -->
     <div class="page-wraper">
         <?php require 'inc/header.php' ?>
 

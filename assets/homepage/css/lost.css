@@ -1,0 +1,79 @@
+
+.loding_txt {
+    background-image: url(../assets/homepage/images/gif/ajax-loader.gif);
+    background-position: left;
+    background-repeat: no-repeat;
+    border: 0;
+    display: inline-block;
+    height: 16px;
+    padding-left: 20px;
+}
+
+/* search box */
+#country-list {
+    float: right;
+    list-style: none;
+    margin-top: 50px !important;
+    margin-left: -500px;
+    padding: 0;
+    width: fit-content;
+    width: 670px;
+    position: absolute;
+    z-index: 10;
+    border: none !important;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow:
+        0.9px 3.3px 11.6px rgba(0, 0, 0, 0.034),
+        2.2px 7.8px 26.9px rgba(0, 0, 0, 0.049),
+        3.9px 13.9px 48.4px rgba(0, 0, 0, 0.06),
+        6.4px 23.1px 80.3px rgba(0, 0, 0, 0.07),
+        10.6px 38.1px 132.3px rgba(0, 0, 0, 0.081),
+        18.5px 66.6px 231.2px rgba(0, 0, 0, 0.096),
+        40px 144px 500px rgba(0, 0, 0, 0.13);
+
+}
+
+.searchProd {
+    max-width: 300px !important;
+}
+
+.trs {
+    border: none !important;
+}
+
+.tds {
+    border: none !important;
+}
+
+.tds a {
+    color: #000 !important;
+}
+
+.trs:hover {
+    background-color: #f1f1f1 !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 1px;
+    height: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 0vh;
+    background: #edf2f7;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 0vh;
+    border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}

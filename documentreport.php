@@ -1,10 +1,9 @@
 <?php require 'inc/css.php';
-session_start();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
+require 'inc/server.php';
 ?>
 
 <body id="bg" style="overflow:hidden;">
-    <div id="loading-area"></div>
+    <!-- <div id="loading-area"></div> -->
     <div class="page-wraper">
         <?php require 'inc/header.php' ?>
 

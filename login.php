@@ -1,6 +1,6 @@
-<?php require 'inc/css.php' ?>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
+require 'inc/server.php';
+require 'inc/css.php' ;
 if (isset($_POST['login'])) {
 
 	$email = $_POST['email'];
@@ -20,27 +20,21 @@ if (isset($_POST['login'])) {
 
 <body id="bg">
 	<div class="page-wraper" >
-		<div id="loading-area"></div>
+	<?php require 'inc/header.php' ?>
+		<!-- <div id="loading-area"></div> -->
 		<!-- Content -->
-		<div class="page-content bg-white login-style2" style="background-image: url(assets/homepage/images/background/bg6.jpg); background-size: cover;">
+		<div class="page-content bg-white login-style2" style="background-image: url(assets/homepageimages/background/bg6.jpg); background-size: cover;">
 			<div class="section-full">
 				<!-- Login Page -->
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-6 col-md-6 d-flex">
-							<div class="text-white max-w400 align-self-center">
-
-								<h2 class="m-b10">Login To You Now</h2>
-								<p>paragraph content here</p>
-								
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6">
-							<div class="login-2 submit-resume p-a30 seth">
+						<div class="col-lg-4 col-md-4 offset-lg-4">
+							<div class="login-2 submit-resume p-a10 seth">
 								<div class="tab-content nav">
 									<?php echo @$message; ?>
 									<form id="login" class="tab-pane active col-12 p-a0 " method="POST">
-										<p class="font-weight-600">If you have an account with us, please log in.</p>
+									<h2 class="font-weight-700 m-b5">Connect account </h2><br>
+										<!-- <p class="font-weight-600">If you have an account with us, please log in.</p> -->
 										<div class="form-group">
 											<?php echo @$result; ?>
 											<label>E-Mail Address*</label>
@@ -82,6 +76,7 @@ if (isset($_POST['login'])) {
 			</div>
 		</div>
 		<!-- Content END -->
+		<?php require 'inc/footer.php' ?>
 		<button class="scroltop fa fa-chevron-up"></button>
 	</div>
 	<?php require 'inc/js.php' ?>

@@ -1,6 +1,6 @@
 <?php require 'inc/css.php' ?>
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
+require 'inc/server.php';
 if (isset($_POST['signup'])) {
 	$fname = $_POST['firstname'];
 	$lname = $_POST['lastname'];
@@ -31,7 +31,7 @@ if (isset($_POST['signup'])) {
 ?>
 <body style="overflow:hidden;">
 
-<div id="loading-area"></div>
+<!-- <div id="loading-area"></div> -->
 <div class="page-wraper">
 	<?php require 'inc/header.php' ?>
 	<!-- contact area -->
@@ -89,11 +89,15 @@ if (isset($_POST['signup'])) {
 			</div>
 		</div>
 		<!-- Product END -->
+		<?php require 'inc/footer.php' ?>
 	</div>
 	<!-- contact area  END -->
+
 </div>
 
 <!-- scroll top button -->
+
 <button class="scroltop fa fa-arrow-up"></button>
+
 
 <?php require 'inc/js.php' ?>

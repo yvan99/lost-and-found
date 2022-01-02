@@ -2216,9 +2216,10 @@ blockquote:before {
 }
 .extra-nav {
   float: right;
-  padding: 26px 0;
+  padding: 6px 0;
+  height:10px !important;
   position: relative;
-  z-index: 9;
+  
 }
 .extra-nav .site-button-link {
   font-size: 15px;
@@ -2544,7 +2545,7 @@ blockquote:before {
   }
 }
 .main-bar {
-  background: var(--white);
+  background: #0063cf;
   width: 100%;
   position: relative;
 }
@@ -2927,7 +2928,7 @@ blockquote:before {
     float: right;
   }
   .site-header.center.mo-left .header-nav .logo-header {
-    padding: 20px 15px;
+    padding: 10px 10px;
   }
   .site-header.center.mo-left .header-nav .logo-header a {
     display: block;
@@ -3675,12 +3676,12 @@ blockquote:before {
   height: 450px;
 }
 .dez-bnr-inr {
-  height: 300px;
+ 
   background-size: cover;
   background-position: center center;
   display: table;
   width: 100%;
-  text-align: left;
+  text-align: center;
 }
 .dez-bnr-inr .container {
   display: table;

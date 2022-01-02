@@ -110,7 +110,7 @@ class client{
       $log = verify_password($password, $hash);
       if ($log) {
         $log;
-        session_start();
+       // session_start();
       //$_SESSION['clientIdLost']=$id;
         create_session($id, 'clientIdLost');
        header('location:./');

@@ -1,15 +1,14 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/core/init.php';
 
-class client{
+class client
+{
   public $fname;
   public $lname;
   public $phone;
   public $email;
   public $password;
- 
-
 
   function __construct($fname = null, $lname = null, $phone = null, $email = null, $password = null)
   {
@@ -18,69 +17,51 @@ class client{
     $this->phone = escape($phone);
     $this->email = escape($email);
     $this->password = escape($password);
-    
   }
 
   function signup()
   {
+    $hashedpassword = create_hash($this->password);
 
-    
+    //this will hash password
+    $affectedRow = countAffectedRows('client', "cli_email= '$this->email'");
 
-      $hashedpassword = create_hash($this->password);
-
-      //this will hash password
-      $affectedRow = countAffectedRows('client', "cli_email= '$this->email'");
-
-      //$affectedRow will verify if email is already registerd
+    //$affectedRow will verify if email is already registerd
 
 
-      if ($affectedRow == 0) {
-        $token = verificationToken();
+    if ($affectedRow == 0) {
+      $token = verificationToken();
 
-        //this token sent to user
+      //this token sent to user
 
-        $data = ['cli_fname' => $this->fname, 'cli_lname' => $this->lname, 'cli_email' => $this->email, 'cli_password' =>$hashedpassword, 'cli_phone' => $this->phone, 'cli_status' => 1,];
+      $data = ['cli_fname' => $this->fname, 'cli_lname' => $this->lname, 'cli_email' => $this->email, 'cli_password' => $hashedpassword, 'cli_phone' => $this->phone, 'cli_status' => 0, 'token' => $token];
 
-        //$data array will store data to be inserted
-        $dataStructure = 'cli_fname, cli_lname, cli_email, cli_password, cli_phone, cli_status';
-        //$dataStructure will hold datastructure of table
-        $values = ':cli_fname, :cli_lname, :cli_email, :cli_password, :cli_phone, :cli_status';
+      //$data array will store data to be inserted
+      $dataStructure = '`cli_fname`, `cli_lname`, `cli_email`, `cli_password`, `cli_phone`, `cli_token`, `cli_status`';
+      //$dataStructure will hold datastructure of table
+      $values = ':cli_fname, :cli_lname, :cli_email, :cli_password, :cli_phone,:token, :cli_status';
 
-        insert('client', $dataStructure, $values, $data);
-
-        // $email =explode("@",$this->email);
-        //$emailP1=$email[0];
-        //$emailP2=$email[1];
-
-        //start of section for sending mail to verify signed up user
-        //echo '<script type="text/javascript">window.location =("account_verification?data=' .actor($emailP2) . '&&state='.actor($emailP1). ' ")</script>';
-        $userBody='`
+      insert('client', $dataStructure, $values, $data);
+      $userBody = '`
         <table style="padding:0px;border:0px solid #DDD;margin:0 auto;font-family:calibri;font-weight:bold;">
         
         <tr><td style="padding:10px 30px;margin:0;text-align:left;">
-        Hello '.$this->fname.' '.$this->lname. ' Welcome to lost & found , we are pleased to announce to you that your account  have been successfully created ' . ' <h2 style="color:#dc3545">' . $token . ' </h2> ' . ' Is your account verification code' . '<br>' 
+        Hello ' . $this->fname . ' ' . $this->lname . ' Welcome to lost & found , we are pleased to announce to you that your account  have been successfully created ' . ' <h2 style="color:#dc3545">' . $token . ' </h2> ' . ' Is your account verification code' . '<br>'
         . 'You will use it to access your account :' . 'Do not share any information provided with anyone and if you have any issues with your account do not hesitate to contact us
         
         Kindly Regards,<br> lost&found support team <br><br></td></tr>
-  
-  
-                    
-                    
-          
-        </table>
-        
-        
-        
-        `';
-        resetpasswordmail($this->email,$userBody,'account verification');
-      
+        </table>`';
+      resetpasswordmail($this->email, $userBody, 'account verification');
+      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user='.actor($token).'"}, 1000);' . "</script>";
 
-        //end of section
-        return true;
-      } else return false;
-   
-
-
+    } else {
+      $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong> Email is already taken</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+  </div>';
+      echo $message;
+    }
   }
 
   function signin($email, $password)
@@ -89,40 +70,34 @@ class client{
     $email = escape($email);
     $password = escape($password);
     $count = countAffectedRows('client', "cli_email='$email'");
-
-
     if ($count == 1) {
-
       //from here we are sure that email are registered
-
-      $rows = select('*', 'client', "cli_email='$email' and cli_status = 1 ");
+      $rows = select('*', 'client', "cli_email='$email'");
       $hash = null;
-
-
       foreach ($rows as $row)  $hash = $row['cli_password'];
-
-
       //selection of hashed password stored in db
 
       foreach ($rows as $row) $id = $row['cli_id'];
       $id;
-
       $log = verify_password($password, $hash);
       if ($log) {
         $log;
-       // session_start();
-      //$_SESSION['clientIdLost']=$id;
         create_session($id, 'clientIdLost');
-       header('location:./');
-      } else{
-        $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong> Invalid credentials , try again </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        $message = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong> Logged In , Redirecting ...</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">×</span>
         </button>
     </div>';
-    return $message;
+        echo $message;
+        echo "<script>" . 'setTimeout(function(){ window.location = "./";}, 2000);' . "</script>";
       }
-        
+    } else {
+      $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+       <strong> Invalid credentials , try again </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">×</span>
+       </button>
+   </div>';
+      return $message;
     }
   }
 
@@ -134,45 +109,45 @@ class client{
 
   function resetpassword($email)
   {
-        $email=escape($email);
-        $count=countAffectedRows('admin', "adm_email='$email' and adm_status = 1");
-    
-        if ($count!=1) {
-            return false;
-        } else {
-            $token=verificationToken();
-            $row=select('*', 'admin', "adm_email='$email' and adm_status = 1");
-            #selection of admin id  belongs to email provided
-            foreach ($row as $admin) {
-                $admName=$admin['adm_fname'].' '.$admin['adm_lname'];
-                
-                $adminId=$admin['adm_id'];
-            }
-            #this will expire all token belong to member befor sending other
-            update('verification_token', 'vt_status=:vt_status', "vt_userId='$adminId' and vt_status=1", ['vt_status'=>0,]);
-            #$data array will store data to be inserted
-            $data = [
-        'vt_token' =>$token,
-        'vt_indate'=>date('Y-m-d  h:i:s'),
-        'vt_user' =>'admin',
-        'vt_userId' =>$adminId,
-        'vt_status'=>'1',
-        ];
-            #$dataStructure will hold datastructure of table
-            $dataStructure='vt_token, vt_indate, vt_user, vt_userId, vt_status';
-            #$values
-            $values=':vt_token, :vt_indate, :vt_user, :vt_userId, :vt_status';
-            echo '<script type="text/javascript">window.location =("emailsent")</script>';
+    $email = escape($email);
+    $count = countAffectedRows('admin', "adm_email='$email' and adm_status = 1");
 
-            insert('verification_token', $dataStructure, $values, $data);
+    if ($count != 1) {
+      return false;
+    } else {
+      $token = verificationToken();
+      $row = select('*', 'admin', "adm_email='$email' and adm_status = 1");
+      #selection of admin id  belongs to email provided
+      foreach ($row as $admin) {
+        $admName = $admin['adm_fname'] . ' ' . $admin['adm_lname'];
 
-            $resetlink="http://localhost/lost-and-found/resetlastStep?token=".actor($token);
-            
-         
-            $userSubject="Reset your password";
+        $adminId = $admin['adm_id'];
+      }
+      #this will expire all token belong to member befor sending other
+      update('verification_token', 'vt_status=:vt_status', "vt_userId='$adminId' and vt_status=1", ['vt_status' => 0,]);
+      #$data array will store data to be inserted
+      $data = [
+        'vt_token' => $token,
+        'vt_indate' => date('Y-m-d  h:i:s'),
+        'vt_user' => 'admin',
+        'vt_userId' => $adminId,
+        'vt_status' => '1',
+      ];
+      #$dataStructure will hold datastructure of table
+      $dataStructure = 'vt_token, vt_indate, vt_user, vt_userId, vt_status';
+      #$values
+      $values = ':vt_token, :vt_indate, :vt_user, :vt_userId, :vt_status';
+      echo '<script type="text/javascript">window.location =("emailsent")</script>';
 
-            
-            $userBody='`
+      insert('verification_token', $dataStructure, $values, $data);
+
+      $resetlink = "http://localhost/lost-and-found/resetlastStep?token=" . actor($token);
+
+
+      $userSubject = "Reset your password";
+
+
+      $userBody = '`
             <table style="padding:0px;border:0px solid #DDD;margin:0 auto;font-family:calibri;font-weight:bold;">
             <tr>
                     <td style="background-color:#fff;padding:10px 30px;margin:0;font-size:2.5em;color:#4A7BA5;text-align:center;">
@@ -180,10 +155,10 @@ class client{
                     </td>
                   </tr>
             <tr><td style="padding:10px 30px;margin:0;text-align:left;">
-            Hi '.$admName.'There was a request to change your password! If you did not make this request then please ignore this email.<br>
+            Hi ' . $admName . 'There was a request to change your password! If you did not make this request then please ignore this email.<br>
 
             
-            Otherwise, please click this link to change your password: </h6> click <a href='."$resetlink".'> here </a> to reset your account '.$resetlink.'<br>
+            Otherwise, please click this link to change your password: </h6> click <a href=' . "$resetlink" . '> here </a> to reset your account ' . $resetlink . '<br>
             
             Kindly Regards,<br> cdh support team <br><br></td></tr>
       
@@ -198,116 +173,107 @@ class client{
             `';
 
 
-        
 
-            resetpasswordmail($email, $userBody, $userSubject);
-            //resetpasswordmail() will send mail with token to reset password
-            return true;
-          }
+
+      resetpasswordmail($email, $userBody, $userSubject);
+      //resetpasswordmail() will send mail with token to reset password
+      return true;
     }
-
-
-    
-
-  } 
-
-  function AcceptResetedpassword($password, $token)
-
-  {  
-              $idSelection=select('*','verification_token,admin',"vt_token ='$token' and admin.adm_id = verification_token.vt_userId ");
-              foreach($idSelection as $ids){
-                $id=$ids['vt_userId'];
-                // $affCode=$id['aff_code'];
-               
-              }
-              $hashedpassword=create_hash(escape($password));
-              update('admin', 'adm_password=:adm_password', "adm_id='$id'", ['adm_password'=>$hashedpassword,]);
-              #update token to verified
-              update('verification_token', 'vt_status=:vt_status', "vt_token='$token'", ['vt_status'=>9,]);
-            //   create_session($affCode,'affiliate');
-              header("location:dashboard");
-              return true;
   }
+}
 
-  function Acceptedpassword()
-  {
+function AcceptResetedpassword($password, $token)
+
+{
+  $idSelection = select('*', 'verification_token,admin', "vt_token ='$token' and admin.adm_id = verification_token.vt_userId ");
+  foreach ($idSelection as $ids) {
+    $id = $ids['vt_userId'];
+    // $affCode=$id['aff_code'];
+
   }
+  $hashedpassword = create_hash(escape($password));
+  update('admin', 'adm_password=:adm_password', "adm_id='$id'", ['adm_password' => $hashedpassword,]);
+  #update token to verified
+  update('verification_token', 'vt_status=:vt_status', "vt_token='$token'", ['vt_status' => 9,]);
+  //   create_session($affCode,'affiliate');
+  header("location:dashboard");
+  return true;
+}
 
-  function reportLost($repoName,$repoId,$repoType,$repoAddress,$repoDate,$user){
+function Acceptedpassword()
+{
+}
 
-    $countSimilar = countAffectedRows('document_found',"	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
-    $countDocId   = countAffectedRows('document_lost',"	doc_serialcode='$repoId' LIMIT 1" );
-    if ($countSimilar) {
-  return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $user)
+{
+
+  $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+  $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
+  if ($countSimilar) {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
   </button>
 </div>';
-}
-elseif ($countDocId) {
-  return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  } elseif ($countDocId) {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
   </button>
 </div>';
-}
-elseif (!$countSimilar && !$countDocId) {
-  $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
-  $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
-  $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
-  insert('document_lost', $datastracture, $values, $data);
-  return 	'<div class="alert alert-success alert-dismissible fade show" role="alert">
+  } elseif (!$countSimilar && !$countDocId) {
+    $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
+    $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
+    $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
+    insert('document_lost', $datastracture, $values, $data);
+    return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
   </button>
 </div>';
-}
-else{
-  return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  } else {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
   <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">×</span>
   </button>
 </div>';
-}
   }
-  function reportFound($tmp,$file,$folder,$repoName, $repoId, $repoType, $repoLocation, $user){
-    $repoDate = date('d/m/Y');
-    $countSimilar = countAffectedRows('document_lost',"	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
-    $countDocId   = countAffectedRows('document_found',"	doc_serialcode='$repoId' LIMIT 1" );
-    if ($countSimilar) {
-      return 	'<div class="alert alert-info alert-dismissible fade show" role="alert">
+}
+function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoLocation, $user)
+{
+  $repoDate = date('d/m/Y');
+  $countSimilar = countAffectedRows('document_lost', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+  $countDocId   = countAffectedRows('document_found', "	doc_serialcode='$repoId' LIMIT 1");
+  if ($countSimilar) {
+    return   '<div class="alert alert-info alert-dismissible fade show" role="alert">
       <strong> We found similar document </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
     </div>';
-    }
-    elseif ($countDocId) {
-      return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  } elseif ($countDocId) {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
     </div>';
-    }
-    elseif (!$countSimilar && !$countDocId) {
-      $file1 = returnMixtring().$file;
-      $path= $folder . $file1;
-      $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'photo' => $file1,'branch'=>$repoLocation];
-      $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_photo`, `bra_id`';
-      $values = ':id,:type,:code,:names,:founder,:status,:date,:photo,:branch';
-      insert('document_found', $datastracture, $values, $data);
-      move_uploaded_file($tmp, $path);
-      return 	'<div class="alert alert-success alert-dismissible fade show" role="alert">
+  } elseif (!$countSimilar && !$countDocId) {
+    $file1 = returnMixtring() . $file;
+    $path = $folder . $file1;
+    $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'photo' => $file1, 'branch' => $repoLocation];
+    $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_photo`, `bra_id`';
+    $values = ':id,:type,:code,:names,:founder,:status,:date,:photo,:branch';
+    insert('document_found', $datastracture, $values, $data);
+    move_uploaded_file($tmp, $path);
+    return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
     </div>';
-    }
-    else{
-      return 	'<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  } else {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
     </div>';
-    }
   }
-?>
+}

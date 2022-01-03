@@ -1,5 +1,7 @@
-<?php require 'inc/css.php';
+<?php 
 require 'inc/server.php';
+require 'inc/userCheck.php';
+require 'inc/css.php';
 ?>
 
 <body id="bg" style="overflow:hidden;">
@@ -34,8 +36,8 @@ require 'inc/server.php';
                                 </div>
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Lost document</h6>
-                                    <p class="m-b20">I have at least 1 month of work experience</p>
-                                    <a href="reportlost" class="site-button" style="display: <?php echo $mess; ?> ;">Report Now</a>
+                                    <!-- <p class="m-b20">I have at least 1 month of work experience</p> -->
+                                    <a href="reportlost" class="site-button" style="display: <?php echo $mess; ?> ;">Report Lost document Now</a>
                                 </div>
                             </div>
                         </div>
@@ -46,8 +48,8 @@ require 'inc/server.php';
                                 </div>
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Found a document</h6>
-                                    <p class="m-b20">I have just graduated/I haven't worked after graduation</p>
-                                    <a href="reportfound" class="site-button" style="display: <?php echo $mess; ?> ;">Report now</a>
+                                    <!-- <p class="m-b20">I have just graduated/I haven't worked after graduation</p> -->
+                                    <a href="reportfound" class="site-button" style="display: <?php echo $mess; ?> ;">Report Found Document now</a>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +58,8 @@ require 'inc/server.php';
             </div>
         </div>
         <!-- Create Account END -->
-
+        <?php require 'inc/footer.php';?>
     </div>
+  
 
-    <?php require 'inc/js.php';
+    <?php require 'inc/js.php';?>

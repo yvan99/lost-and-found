@@ -1,8 +1,8 @@
-<?php require 'inc/css.php';
+<?php 
 require 'inc/server.php';
-
+require 'inc/userCheck.php';
+require 'inc/css.php';
 ?>
-
 <body id="bg">
     <!-- <div id="loading-area"></div> -->
     <div class="page-wraper">
@@ -42,22 +42,7 @@ require 'inc/server.php';
                                     ?>
                                     <form class="job-alert-bx" method="POST">
                                         <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Document Owner Name</label>
-                                                    <input class="form-control" type="text" name="docName">
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Document ID</label>
-                                                    <input class="form-control" type="text" name="docId">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-6">
+                                        <div class="col-6">
                                                 <div class="form-group">
                                                     <label>Document type</label>
 
@@ -73,10 +58,28 @@ require 'inc/server.php';
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label>Where did you lost your document ?</label>
-                                                    <input class="form-control" type="text" name="docAddress">
+                                                    <label>Document Owner Name</label>
+                                                    <input class="form-control" type="text" name="docName" placeholder="Enter document owner's names">
                                                 </div>
                                             </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Document ID</label>
+                                                    <input class="form-control" type="text" name="docId" placeholder="Enter document number/Id">
+                                                </div>
+                                            </div>
+
+                                            
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label>Where did you lost your document ?</label>
+                                                    <input class="form-control" type="text" name="docAddress" placeholder="Enter the address">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label>When did you lost document</label>
@@ -88,7 +91,7 @@ require 'inc/server.php';
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox"  class="custom-control-input" id="job-alert-check" name="docAgree">
-                                                        <label class="custom-control-label" for="job-alert-check">I agree to the Terms and Conditions and Privacy Policy</label>
+                                                        <label class="custom-control-label" for="job-alert-check">I agree to Lost & found Terms and Conditions and Privacy Policy</label>
                                                     </div>
                                                 </div>
                                             </div>

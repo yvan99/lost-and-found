@@ -13,8 +13,8 @@
 #country-list {
     float: right;
     list-style: none;
-    margin-top: 50px !important;
-    margin-left: -500px;
+    margin-top: 10px !important;
+    margin-left: -200px;
     padding: 0;
     width: fit-content;
     width: 670px;
@@ -76,4 +76,11 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: #a0aec0;
+}
+.ClaimButton{
+    background-color: #000 !important;
+    border: none !important;
+    border-radius: 5px !important;
+    color: #fff !important;
+    padding: 10px !important;
 }

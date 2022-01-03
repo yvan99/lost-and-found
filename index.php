@@ -1,6 +1,7 @@
 <?php 
-require_once 'inc/server.php';
-require_once 'inc/css.php';
+require 'inc/server.php';
+require 'inc/userCheck.php';
+require 'inc/css.php';
 ?>
 <body id="bg">
 <!--  <div id="loading-area"></div> -->
@@ -15,14 +16,14 @@ require_once 'inc/css.php';
 					<div class="find-job-bx">
 						
 						<!-- <a href="javascript:void(0);" class="site-button button-sm">Find Jobs, Employment & Career Opportunities</a> -->
-						<h2 class="text-white offset-3"> <img src="assets/homeage/images/icons/search.png" alt=""> Find your document</h2>
+						<h2 class="text-white offset-3"> <img src="assets/homepage/images/icons/search.png" alt=""> Find your document</h2>
 						<form class="dezPlaceAni offset-2" method="POST">
 							<div class="row">
 								<div class="col-lg-9 col-md-6">
 									<div class="form-group">
 										<!-- <label>Search your Document</label> -->
 										<div class="input-group">
-											<input type="text" id="search-box" class="form-control" placeholder="" style="border:none !important;background-color:transparent !important;height:40px !important;border-radius:4px;margin-left:40px">
+											<input type="text" id="search-box" class="form-control" placeholder="" style="border:none !important;background-color:transparent !important;height:40px !important;border-radius:4px;margin-left:40px;width:100%;">
 											<div id="suggesstion-box" class="offset-5"></div>
 										</div>
 									</div>

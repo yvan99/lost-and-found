@@ -1,5 +1,7 @@
-<?php require 'inc/css.php';
+<?php 
 require 'inc/server.php';
+require 'inc/userCheck.php';
+require 'inc/css.php';
 ?>
 
 <body id="bg">

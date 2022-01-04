@@ -78,9 +78,14 @@
     background: #a0aec0;
 }
 .ClaimButton{
-    background-color: #000 !important;
+    background-color: #3396d1 !important;
     border: none !important;
     border-radius: 5px !important;
     color: #fff !important;
     padding: 10px !important;
+}
+.lostPhoto{
+    border-radius: 2px!important;
+  
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 24%) !important;
 }

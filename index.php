@@ -76,10 +76,10 @@ require 'inc/css.php';
 					</div>
 					<?php endforeach ?>
 		
-
+<!-- 
 					<div class="col-lg-12 text-center m-t30">
 						<a href="category-all-jobs.html" class="site-button radius-xl">All Categories</a>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>

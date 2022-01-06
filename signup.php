@@ -1,7 +1,7 @@
 <?php require 'inc/css.php' ;
 require 'inc/server.php';
 ?>
-<body style="overflow:hidden;">
+<body >
 
 <!-- <div id="loading-area"></div> -->
 <div class="page-wraper">
@@ -70,11 +70,11 @@ require 'inc/server.php';
 								<div class="row">
 									<div class="form-group col-6">
 										<label class="font-weight-700">Password *</label>
-										<input name="password" class="form-control" type="password">
+										<input name="password" class="form-control" type="password" placeholder="********">
 									</div>
 									<div class="form-group col-6">
 										<label class="font-weight-700">Confirm Password *</label>
-										<input name="passwordconfirm" class="form-control" type="password">
+										<input name="passwordconfirm" class="form-control" type="password" placeholder="**********">
 									</div>
 								</div>
 								<div class="text-left">
@@ -87,10 +87,10 @@ require 'inc/server.php';
 			</div>
 		</div>
 		<!-- Product END -->
-		<?php require 'inc/footer.php' ?>
+
 	</div>
 	<!-- contact area  END -->
-
+	<?php require 'inc/footer.php' ?>
 </div>
 
 <!-- scroll top button -->

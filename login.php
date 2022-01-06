@@ -51,7 +51,7 @@ require 'inc/css.php';
 											</div>
 										</div>
 										<div class="text-center">
-											<button class="site-button float-left" name="login">Sign In</button>
+											<button class="btn btn-warning float-left" name="login">Sign In</button>
 											<a class="btn btn-primary text-light" href="signup">Create account now</a>
 											<!-- <a data-toggle="tab" href="#forgot-password" class="site-button-link forget-pass m-t15 float-right"><i class="fa fa-unlock-alt"></i> Forgot Password</a> -->
 										</div>

@@ -36,7 +36,7 @@ require 'inc/css.php';
                                       </div>';
                                       }
                                       else{
-                                         echo reportLost($repoName,$repoId,$repoType,$repoAddress,$repoDate,$user);
+                                         echo reportLost($repoName,$repoId,$repoType,$repoAddress,$repoDate,$userId);
                                         }
                                       }
                                     ?>

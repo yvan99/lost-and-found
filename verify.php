@@ -14,7 +14,7 @@ if (isset($_POST['btn-submit'])) {
   $number_4 = escape($_POST['num_4']);
   $number_5 = escape($_POST['num_5']);
   $number_6 = escape($_POST['num_6']);
- $combiner = $number_1 . $number_2 . $number_3 . $number_4 . $number_5 . $number_6;
+  $combiner = $number_1 . $number_2 . $number_3 . $number_4 . $number_5 . $number_6;
   if ($combiner != $getToken) {
     $message = '<div class="status-userNotCreated">
     <strong> Sorry ,your token is not matchinh the one we sent you , Try again </strong>

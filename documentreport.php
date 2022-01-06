@@ -4,7 +4,7 @@ require 'inc/userCheck.php';
 require 'inc/css.php';
 ?>
 
-<body id="bg" style="overflow:hidden;">
+<body id="bg" >
     <!-- <div id="loading-area"></div> -->
     <div class="page-wraper">
         <?php require 'inc/header.php' ?>
@@ -37,7 +37,7 @@ require 'inc/css.php';
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Lost document</h6>
                                     <!-- <p class="m-b20">I have at least 1 month of work experience</p> -->
-                                    <a href="reportlost" class="site-button" style="display: <?php echo $mess; ?> ;">Report Lost document Now</a>
+                                    <a href="reportlost" class="btn btn-warning" style="display: <?php echo $mess; ?> ;">Report Lost document Now</a>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +49,7 @@ require 'inc/css.php';
                                 <div class="clearifx">
                                     <h6 class="m-b10">I Found a document</h6>
                                     <!-- <p class="m-b20">I have just graduated/I haven't worked after graduation</p> -->
-                                    <a href="reportfound" class="site-button" style="display: <?php echo $mess; ?> ;">Report Found Document now</a>
+                                    <a href="reportfound" class="btn btn-success" style="display: <?php echo $mess; ?> ;">Report Found Document now</a>
                                 </div>
                             </div>
                         </div>

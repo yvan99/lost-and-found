@@ -30,8 +30,8 @@
     <link rel="stylesheet" type="text/css" href="assets/homepage/plugins/themify/themify-icons.css">
     <link rel="stylesheet" type="text/css" href="assets/homepage/css/style.min.css">
     <link rel="stylesheet" type="text/css" href="assets/homepage/css/templete.min.css">
-    <!-- <link class="skin" rel="stylesheet" type="text/css" href="assets/homepage/css/skin/skin-1.min.css">
-	<link class="skin" rel="stylesheet" type="text/css" href="assets/homepage/css/dark-layout.min.css"> -->
+   <link class="skin" rel="stylesheet" type="text/css" href="assets/homepage/css/skin/skin-1.min.css">
+	<link class="skin" rel="stylesheet" type="text/css" href="assets/homepage/css/dark-layout.min.css"> 
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="assets/homepage/fonts.googleapis.com/index.html">

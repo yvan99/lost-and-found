@@ -10300,8 +10300,8 @@ footer.footer-white.site-footer .widget_services ul li a {
   margin-bottom: 30px;
 }
 #bg {
-  background-attachment: fixed;
-  background-size: cover;
+  /* background-attachment: fixed;
+  background-size: cover; */
 }
 .boxed .page-wraper {
   max-width: 1200px;

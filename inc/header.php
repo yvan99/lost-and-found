@@ -12,7 +12,7 @@
 						<span></span>
 					</button>
 					<!-- Extra Nav -->
-					<div class="extra-nav" >
+					<div class="extra-nav">
 						<div class="extra-cell">
 							<!-- <a href="javascript:void(0);" class="layout-btn">
 								<input type="checkbox">
@@ -28,11 +28,11 @@
 									# code...
 								}
 							?>
-								<button class="site-button"><?php echo strtoupper($user['cli_fname'] . ' ' . $user['cli_lname']) ?></button>
-								<a class="site-button" href="logout">Logout</a>
+								<button class="btn btn-warning"> <i class="fa fa-user"></i> <?php echo strtoupper($user['cli_fname'] . ' ' . $user['cli_lname']) ?></button>
+								<a class="btn btn-danger" href="logout"> <i class="fa fa-power"></i> Logout</a>
 							<?php } else { ?>
-								<a href="signup" class="site-button"><i class="fa fa-user"></i> Sign Up</a>
-								<a href="login" class="site-button"><i class="fa fa-lock"></i> Login</a>
+								<a href="signup" class="btn btn-warning"><i class="fa fa-user"></i> Sign Up</a>
+								<a href="login" class="btn btn-warning"><i class="fa fa-lock"></i> Login</a>
 
 							<?php } ?>
 

@@ -36,7 +36,7 @@ require 'inc/css.php';
                                           </button>
                                       </div>';
                                         } else {
-                                            echo reportFound($tmp,$file,$folder,$repoName, $repoId, $repoType, $repoLocation, $user);
+                                            echo reportFound($tmp,$file,$folder,$repoName, $repoId, $repoType, $repoLocation, $userId);
                                         }
                                     }
                                     ?>

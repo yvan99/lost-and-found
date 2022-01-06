@@ -10,18 +10,6 @@ $GLOBALS['config'] = array(
               'password' => '',
               'db' => 'lostfound_db'
        ),
-       'remember' => array(
-              'cookie_name' => 'hash',
-              'cookie_expriry' => '604800'
-       ),
-       'session' => array(
-              'session_admin' => 'admin',
-              'session_client' => 'client',
-              'session_agent' => 'agent',
-              
-       ),
-
-
 );
 
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/config/config.php';
@@ -35,8 +23,8 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/session
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/sqlQueries.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/utilities.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/tokenhandler.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/metricsHandler.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/dateHandler.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/sms.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/controllers/agent.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/controllers/admin.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/controllers/client.php';

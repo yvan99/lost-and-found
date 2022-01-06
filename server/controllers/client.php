@@ -52,8 +52,7 @@ class client
         Kindly Regards,<br> lost&found support team <br><br></td></tr>
         </table>`';
       resetpasswordmail($this->email, $userBody, 'account verification');
-      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user='.actor($token).'"}, 1000);' . "</script>";
-
+      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user=' . actor($token) . '"}, 1000);' . "</script>";
     } else {
       $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong> Email is already taken</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -69,14 +68,13 @@ class client
 
     $email = escape($email);
     $password = escape($password);
-    $count = countAffectedRows('client', "cli_email='$email'");
-    if ($count == 1) {
-      //from here we are sure that email are registered
+    $count = countAffectedRows('client', "cli_email='$email' LIMIT 1");
+    if ($count) {
+      //from here we are sure that email is available
       $rows = select('*', 'client', "cli_email='$email'");
       $hash = null;
       foreach ($rows as $row)  $hash = $row['cli_password'];
       //selection of hashed password stored in db
-
       foreach ($rows as $row) $id = $row['cli_id'];
       $id;
       $log = verify_password($password, $hash);
@@ -242,38 +240,50 @@ function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $use
 function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoLocation, $user)
 {
   $repoDate = date('d/m/Y');
+  # VERIFYING IF THERE IS'NT ANY SIMILAR LOST DOCUMENT
   $countSimilar = countAffectedRows('document_lost', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+  # AVOIDING DATA REDUDANCY
   $countDocId   = countAffectedRows('document_found', "	doc_serialcode='$repoId' LIMIT 1");
-  if ($countSimilar) {
-    return   '<div class="alert alert-info alert-dismissible fade show" role="alert">
-      <strong> We found similar document </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-      </button>
-    </div>';
-  } elseif ($countDocId) {
+
+
+  if ($countDocId) {
     return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
     </div>';
-  } elseif (!$countSimilar && !$countDocId) {
-    $file1 = returnMixtring() . $file;
-    $path = $folder . $file1;
-    $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'photo' => $file1, 'branch' => $repoLocation];
-    $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_photo`, `bra_id`';
-    $values = ':id,:type,:code,:names,:founder,:status,:date,:photo,:branch';
-    insert('document_found', $datastracture, $values, $data);
-    move_uploaded_file($tmp, $path);
-    return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  } else {
+    if ($countSimilar) {
+      #FETCH LOST DOC USER INFO
+      $getSimilar = select('*', 'client,document_lost', "document_lost.doc_serialcode='$repoId' and document_lost.doc_founder=client.cli_id");
+      if ($getSimilar) {
+        foreach ($getSimilar as $similar) :
+          $userPhone = $similar['cli_phone'];
+          $userFirst = $similar['cli_fname'];
+          $userLast  = $similar['cli_lname'];
+          $userIde   = $similar['cli_id'];
+        endforeach;
+        $message = "Hello " . $userFirst . ' ' . $userLast . " Someone have reported a document with the same information as what you have claimed to lost , Please visit our system to verify if it is yours";
+        # IF USER FOUND ,SEND SMS NOTIFICATION 
+        sendSms($userPhone, $message);
+        echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+      <strong> We found similar lost document , Sending notification ... </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+    </div>';
+      }
+      $file1 = returnMixtring() . $file;
+      $path = $folder . $file1;
+      $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'photo' => $file1, 'branch' => $repoLocation];
+      $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_photo`, `bra_id`';
+      $values = ':id,:type,:code,:names,:founder,:status,:date,:photo,:branch';
+      insert('document_found', $datastracture, $values, $data);
+      move_uploaded_file($tmp, $path);
+      return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
       <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
     </div>';
-  } else {
-    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-      <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-      </button>
-    </div>';
+    }
   }
 }

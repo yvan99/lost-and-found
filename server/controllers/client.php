@@ -58,7 +58,7 @@ class client
       <strong> Email is already taken</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
-  </div>';
+        </div>';
       echo $message;
     }
   }
@@ -68,7 +68,7 @@ class client
 
     $email = escape($email);
     $password = escape($password);
-    $count = countAffectedRows('client', "cli_email='$email' LIMIT 1");
+    $count = countAffectedRows('client', "cli_email='$email' and cli_status='1' LIMIT 1");
     if ($count) {
       //from here we are sure that email is available
       $rows = select('*', 'client', "cli_email='$email'");
@@ -197,45 +197,43 @@ function AcceptResetedpassword($password, $token)
   header("location:dashboard");
   return true;
 }
-
 function Acceptedpassword()
 {
 }
-
 function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $user)
 {
 
-  $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
-  $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
-  if ($countSimilar) {
-    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-  </button>
-</div>';
-  } elseif ($countDocId) {
-    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-  </button>
-</div>';
-  } elseif (!$countSimilar && !$countDocId) {
-    $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
-    $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
-    $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
-    insert('document_lost', $datastracture, $values, $data);
-    return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
-  <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-  </button>
-</div>';
-  } else {
-    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">×</span>
-  </button>
-</div>';
-  }
+            $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+            $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
+            if ($countSimilar) {
+              return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+          </div>';
+            } elseif ($countDocId) {
+              return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+          </div>';
+          } elseif (!$countSimilar && !$countDocId) {
+            $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
+            $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
+            $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
+            insert('document_lost', $datastracture, $values, $data);
+            return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+        </div>';
+          } else {
+            return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+        </div>';
+          }
 }
 function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoLocation, $user)
 {
@@ -286,4 +284,36 @@ function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoL
     </div>';
     }
   }
+}
+
+function claim($client,$doc,$fees,$comment=null,$names,$address,$branch,$tel,$momo)
+{
+    $affectedRow = countAffectedRows('claim', "cli_id= '$client' and doc_id='$doc' and claim_status='SUCCESS'");
+    if ($affectedRow == 0) {
+      $refId=reference1();
+      
+        $data = [ 'cli_id'=>$client, 'doc_id'=>$doc,'claim_ref'=>$refId, 'claim_fees'=>$fees, 'claim_comment'=>$comment, 'claim_names'=>$names, 'claim_address'=>$address, 'Claim_branch'=>$branch, 'claim_tel'=>$tel, 'claim_status'=>'PENDING'];
+
+        //$data array will store data to be inserted
+        $dataStructure = 'cli_id, doc_id,claim_ref, claim_fees, claim_comment, claim_names, claim_address, Claim_branch, claim_tel, claim_status';
+        //$dataStructure will hold datastructure of table
+        $values = ' :cli_id, :doc_id,:claim_ref, :claim_fees, :claim_comment, :claim_names, :claim_address, :Claim_branch, :claim_tel, :claim_status';
+        insert('claim', $dataStructure, $values, $data);
+
+         //flutterwave payment
+         $redirectUrl='http://localhost/lost-and-found/approve'; 
+         payment($fees,$momo,$names,$redirectUrl,$refId);
+          
+
+        return true;
+    }
+    else
+    {
+     echo $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong> Claim is already received</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+        </div>';
+
+    }
 }

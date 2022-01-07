@@ -22,6 +22,19 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
         $docDate   = $document['doc_createdDate'];
     endforeach;
 }
+
+$fees=100;
+if (isset($_POST['submitClaim'])){
+
+$comment=$_POST['comment'];
+$names=$_POST['names'];
+$address=$_POST['address'];
+$branch=$_POST['branch'];
+$tel=$_POST['tel'];
+$momo=$_POST['momo'];
+$claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$momo);
+
+}
 ?>
 
 <body id="bg">
@@ -47,7 +60,8 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
 
                                             </div>
                                             <div class="candidate-title">
-                                                <h4 class="m-b5"><a href="javascript:void(0);"><?php echo $docName ?></a></h4>
+                                                <h4 class="m-b5"><a
+                                                        href="javascript:void(0);"><?php echo $docName ?></a></h4>
                                             </div>
                                         </div>
                                         <ul>
@@ -62,7 +76,8 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
                                                     <span>Date found : <?php echo $docDate ?> </span></a></li>
                                             <li><a href="">
                                                     <i class="fa fa-briefcase" aria-hidden="true"></i>
-                                                    <span>Document nearest branch : <?php echo $docBranch ?></span></a></li>
+                                                    <span>Document nearest branch : <?php echo $docBranch ?></span></a>
+                                            </li>
 
                                         </ul>
                                     </div>
@@ -79,25 +94,27 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-group">
                                                     <label>Enter your names</label>
-                                                    <input type="text" class="form-control" name="logiName">
+                                                    <input required type="text" class="form-control" name="names">
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-group">
                                                     <label>What is your address / Street number ?</label>
-                                                    <input type="text" class="form-control" placeholder="Ex : Kigali , Nyamirambo KN 56ST">
+                                                    <input required type="text" class="form-control"
+                                                        placeholder="Ex : Kigali , Nyamirambo KN 56ST" name="address">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-group">
                                                     <label>What is your nearest branch ?</label>
-                                                    <select name="logiBranch">
+                                                    <select required name="branch">
                                                         <option selected disabled>Select location</option>
                                                         <?php $sel = select('*', 'branch', '1');
                                                         foreach ($sel as $cate) :
                                                         ?>
-                                                            <option value="<?php echo  $cate['bra_id'] ?>"><?php echo  $cate['bra_name'] ?></option>
+                                                        <option value="<?php echo  $cate['bra_id'] ?>">
+                                                            <?php echo  $cate['bra_name'] ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -106,7 +123,7 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-group">
                                                     <label>Enter your telephone number</label>
-                                                    <input type="text" class="form-control" name="logiTelephone">
+                                                    <input required type="text" class="form-control" name="tel">
                                                 </div>
                                             </div>
 
@@ -118,42 +135,52 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
                                         <div class="row">
                                             <div class="col-lg-5 col-md-6">
                                                 <div class="form-group">
-                                                    <label>Service charge fee</label><br>
-                                                    <input type="text" class="form-control" disabled value="400 Rwandan francs">
+                                                    <label>Service charge fee(RWF)</label><br>
+                                                    <input type="text" name="fees" class="form-control" disabled
+                                                        value="<?php echo $fees;?>">
+
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-7 col-md-6">
                                                 <div class="form-group">
-                                                    <label>Payment method <img src="assets/homepage/images/icons/momo.jpg" style="width: 50px;" alt=""></label>
-                                                    <input type="text" class="form-control" disabled value="MTN MOBILE MONEY">
+                                                    <label>Payment method <img
+                                                            src="assets/homepage/images/icons/momo.jpg"
+                                                            style="width: 50px;" alt=""></label>
+                                                    <input type="text" class="form-control" disabled
+                                                        value="MTN MOBILE MONEY">
                                                 </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Enter your mobile money number</label>
+                                                <input type="number" style="font-size: 30px;" class="form-control"
+                                                    name="momo" required>
                                             </div>
 
-                                            <div class="col-lg-9 col-md-12">
-                                                <div class="form-group">
-                                                    <label>Enter your mobile money number</label>
-                                                    <input type="text" style="font-size: 30px;" class="form-control" name="logiMomo" required>
-                                                </div>
-                                            </div>
+
+
 
 
                                             <div class="col-lg-12 col-md-12">
                                                 <div class="form-group">
                                                     <label>Do you have any comment ?</label>
-                                                    <textarea class="form-control" name="logiComment"></textarea>
+                                                    <textarea required class="form-control" name="comment"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="job-alert-check" name="docAgree">
-                                                        <label class="custom-control-label" for="job-alert-check">I agree to the Terms and Conditions and Privacy Policy</label>
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="job-alert-check" name="docAgree" required>
+                                                        <label class="custom-control-label" for="job-alert-check">I
+                                                            agree to the Terms and Conditions and Privacy Policy</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <button type="submit" class="site-button m-b30" name="logiClaim">Confirm your claim</button>
+                                        <input type="submit" class="site-button m-b30" name="submitClaim"
+                                            value="Confirm your claim">
+
                                     </form>
                                 </div>
                             </div>

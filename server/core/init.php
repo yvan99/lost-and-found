@@ -28,3 +28,6 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/sms.php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/controllers/agent.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/controllers/admin.php';
 include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/controllers/client.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/apicallerhandler.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/referenceidhandler.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/lost-and-found/server/helpers/payment.php';

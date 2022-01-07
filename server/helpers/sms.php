@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/lost-and-found/server/core/init.php';
 function sendSms($recepients,$message)
 {
     $data = array(
-        "sender"     => "", // Enter sender names
+        "sender"     => "lost&found", // Enter sender names
         "recipients" => $recepients, // Recepients array
         "message"    => $message,  // SMS contents
     );

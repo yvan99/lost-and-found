@@ -14,7 +14,7 @@ $ref=explode(":",$refstring);
 $ref= $ref[1];
 $ref=str_replace('"', "", $ref);
 //end of converting string into array and get ref_txt
-update('claim', 'claim_status=:claim_status', "claim_ref='$ref'", ['claim_status'=>'SUCCESS',]);
+update('claim', 'claim_status=:claim_status', "claim_ref='$ref'", ['claim_status'=>'PAID',]);
 header("location:index");
 
 

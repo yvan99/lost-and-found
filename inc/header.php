@@ -73,6 +73,11 @@
 									<a href="myreports">My reports</a>
 
 								</li>
+
+								<li>
+									<a href="myclaims">Document claims</a>
+
+								</li>
 							<?php } ?>
 
 

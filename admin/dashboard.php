@@ -10,10 +10,10 @@ require_once 'inc/server.php';
         <div class="big">
             <?php require_once 'inc/topnav.php' ?>
             <!-- Header -->
-            <div class="header pb-6">
+            <div class="header pb-3">
                 <div class="container-fluid">
                     <div class="header-body">
-                        <h1 class='text-white pb-50'>Welcome onboard ,<?php echo $names ?></h1>
+                        <h1 class='text-white pb-50'>Welcome onboard , <?php echo $names ?></h1>
                         <!-- Card stats -->
                         <div class="row">
                             <div class="col-xl-3 col-md-6">

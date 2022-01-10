@@ -7,25 +7,25 @@
                 <!-- Nav items -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.html">
+                        <a class="nav-link active" href="dashboard">
                             <i class="ni ni-tv-2 text-primary"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="icons.html">
+                        <a class="nav-link" href="branches">
                             <i class="ni ni-planet text-orange"></i>
                             <span class="nav-link-text">Branch Management</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="map.html">
+                        <a class="nav-link" href="lostdocs">
                             <i class="ni ni-pin-3 text-primary"></i>
                             <span class="nav-link-text">Lost documents</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="profile.html">
+                        <a class="nav-link" href="foundocs">
                             <i class="ni ni-single-02 text-yellow"></i>
                             <span class="nav-link-text">Found documents</span>
                         </a>

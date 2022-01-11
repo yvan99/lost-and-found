@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="tables.html">
+                        <a class="nav-link" href="claims">
                             <i class="ni ni-bullet-list-67 text-default"></i>
                             <span class="nav-link-text">Document claims</span>
                         </a>
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="register.html">
+                        <a class="nav-link" href="logistic">
                             <i class="ni ni-circle-08 text-pink"></i>
                             <span class="nav-link-text">Logistic agents</span>
                         </a>
@@ -53,17 +53,15 @@
                 <!-- Divider -->
                 <hr class="my-3">
                 <!-- Heading -->
-                <h6 class="navbar-heading p-0 text-muted">
-                    <span class="docs-normal">Data analytics</span>
-                </h6>
+      
                 <!-- Navigation -->
                 <ul class="navbar-nav mb-md-3">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="../docs/getting-started/overview.html" target="_blank">
                             <i class="ni ni-spaceship"></i>
                             <span class="nav-link-text">Manage accounts</span>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item">
                         <a class="nav-link active active-pro" href="logout">

@@ -3,6 +3,7 @@ require 'inc/server.php';
 require 'inc/userCheck.php';
 require 'inc/css.php';
 ?>
+
 <body id="bg">
     <!-- <div id="loading-area"></div> -->
     <div class="page-wraper">
@@ -12,7 +13,8 @@ require 'inc/css.php';
             <div class="container">
                 <ul class="nav nav-tabs nav-tabs-1" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link site-button active" id="tabPersonal" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Report found document</a>
+                        <a class="nav-link site-button active" id="tabPersonal" data-toggle="tab" href="#personal"
+                            role="tab" aria-controls="personal" aria-selected="true">Report found document</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -66,7 +68,8 @@ require 'inc/css.php';
                                                         <?php $sel = select('*', 'document_type', '1');
                                                         foreach ($sel as $cate) :
                                                         ?>
-                                                            <option value="<?php echo  $cate['doctype_id'] ?>"><?php echo  $cate['doctype_name'] ?></option>
+                                                        <option value="<?php echo  $cate['doctype_id'] ?>">
+                                                            <?php echo  $cate['doctype_name'] ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -79,7 +82,8 @@ require 'inc/css.php';
                                                         <?php $sel = select('*', 'branch', '1');
                                                         foreach ($sel as $cate) :
                                                         ?>
-                                                            <option value="<?php echo  $cate['bra_id'] ?>"><?php echo  $cate['bra_name'] ?></option>
+                                                        <option value="<?php echo  $cate['bra_id'] ?>">
+                                                            <?php echo  $cate['bra_name'] ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -94,13 +98,16 @@ require 'inc/css.php';
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="job-alert-check" name="docAgree">
-                                                        <label class="custom-control-label" for="job-alert-check">I agree to the Terms and Conditions and Privacy Policy</label>
+                                                        <input type="checkbox" class="custom-control-input"
+                                                            id="job-alert-check" name="docAgree">
+                                                        <label class="custom-control-label" for="job-alert-check">I
+                                                            agree to the Terms and Conditions and Privacy Policy</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">
-                                                <button class="site-button" type="submit" name="reportFound">Report Now</button>
+                                                <button class="site-button" type="submit" name="reportFound">Report
+                                                    Now</button>
                                             </div>
                                         </div>
                                     </form>
@@ -115,10 +122,15 @@ require 'inc/css.php';
                                             <li>Create up to 5 personalized job alerts</li>
                                         </ul>
                                         <div class="dez-divider bg-gray-dark"></div>
-                                        <h6 class="font-14">Why <a href="../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="aec7c0c8c1eecbd6cfc3dec2cb80cdc1c3">[email&#160;protected]</a></h6>
+                                        <h6 class="font-14">Why <a href="../cdn-cgi/l/email-protection.html"
+                                                class="__cf_email__"
+                                                data-cfemail="aec7c0c8c1eecbd6cfc3dec2cb80cdc1c3">[email&#160;protected]</a>
+                                        </h6>
                                         <p class="m-b10"><strong class="text-black m-r10">800,000+ </strong> Jobs</p>
-                                        <p class="m-b10"><strong class="text-black m-r10">100,000+</strong> CV searches daily</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.</p>
+                                        <p class="m-b10"><strong class="text-black m-r10">100,000+</strong> CV searches
+                                            daily</p>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry has
+                                            been the industry.</p>
                                     </div>
                                 </div>
                             </div>

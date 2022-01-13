@@ -11,15 +11,15 @@ class client
   public $password;
 
   function __construct($fname = null, $lname = null, $phone = null, $email = null, $password = null)
-  {
+{
     $this->fname = escape($fname);
     $this->lname = escape($lname);
     $this->phone = escape($phone);
     $this->email = escape($email);
     $this->password = escape($password);
-  }
+}
 
-  function signup()
+function signup()
   {
     $hashedpassword = create_hash($this->password);
 
@@ -63,7 +63,7 @@ class client
     }
   }
 
-  function signin($email, $password)
+function signin($email, $password)
   {
 
     $email = escape($email);
@@ -99,13 +99,13 @@ class client
     }
   }
 
-  function logout()
+function logout()
   {
     destroy_session();
     return true; //
   }
 
-  function resetpassword($email)
+function resetpassword($email)
   {
     $email = escape($email);
     $count = countAffectedRows('admin', "adm_email='$email' and adm_status = 1");
@@ -237,7 +237,7 @@ function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $use
 }
 function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoLocation, $user)
 {
-  $repoDate = date('d/m/Y');
+  $repoDate = date('Y/m/d');
   # VERIFYING IF THERE IS'NT ANY SIMILAR LOST DOCUMENT
   $countSimilar = countAffectedRows('document_lost', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
   # AVOIDING DATA REDUDANCY
@@ -316,4 +316,65 @@ function claim($client,$doc,$fees,$comment=null,$names,$address,$branch,$tel,$mo
         </div>';
 
     }
+}
+
+function FoundNotification($fullNames,$docId,$docType)
+{
+  //best matches 1.same doc type and doc id 
+
+  $CountBest=countAffectedRows('document_found',"doctype_id ='$docType' and doc_serialcode='$docId' and doc_status='0'");
+  //worst matches 1.same id or doc owner name  
+  $CountWorst=countAffectedRows('document_found',"doc_fullnames ='$fullNames' or doc_serialcode='$docId' and doc_status='0'");
+  $result=['best'=>null,'worst'=>null];
+  
+  if($CountBest == 1 ){
+  
+    $SelectBest=select('*','document_found',"doctype_id ='$docType' and doc_serialcode='$docId' and doc_status='0'");
+    $result['best']=$SelectBest;
+    }
+   if($CountWorst>0){
+    $SelectWorst=select('*','document_found',"(doc_fullnames ='$fullNames' and (doc_serialcode='$docId' and doctype_id <>'$docType' )) or (doc_fullnames ='$fullNames' and (doc_serialcode<>'$docId' and doctype_id ='$docType' )) or (doc_fullnames ='$fullNames' and (doc_serialcode<>'$docId' and doctype_id <>'$docType' )) and doc_status='0'");
+    $result['worst']=$SelectWorst;
+    }
+  else return false;
+   
+  return $result;
+
+}
+   
+function NotificationIteration($userId)
+{
+    $countLostDoc=countAffectedRows("document_lost", "doc_founder= '$userId' and  doc_status=0");
+    if ($countLostDoc > 0) {
+        $SelectLostDoc=select("*", "document_lost", "doc_founder= '$userId' and  doc_status= 0");
+        foreach ($SelectLostDoc as $lostDoc) {
+            $fullNames=$lostDoc['doc_fullnames'];
+            $docId=$lostDoc['doc_serialcode'];
+            $docType=$lostDoc['doctype_id'];
+            $result=FoundNotification($fullNames, $docId, $docType);
+            if ($result) {
+                echo "lost document with number".$docId;
+            }
+
+            if (isset($result['best'])) {
+                echo"<br> best";
+                foreach ($result['best'] as $r) {
+                    echo"<br>".($r['doc_id']);
+                }
+            }
+            
+            if (isset($result['worst'])) {
+                echo"<br> worst";
+                foreach ($result['worst'] as $r) {
+                    echo"<br>".($r['doc_id']);
+                }
+            }
+            echo"<br>";
+        }
+      }
+
+  
+  else return "no document found";
+
+  
 }

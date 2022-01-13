@@ -15,4 +15,45 @@ function minDate($scope,$measurement){
     
     
 
-}?>
+}
+
+
+function calcPostedDay($date)
+{
+    
+            /**
+         * This function calculates difference between given date and today `s  date  
+         *
+         * @param string  $date A date of day you want to campare with today `s date 
+         
+        */
+
+            $today=date('Y/m/d');
+            $differenceinsec= strtotime($today)-strtotime($date);
+            $TotalsecinDay=60*60*24;
+            $differenceinday=$differenceinsec/$TotalsecinDay;
+            
+
+            if($differenceinday==0) return "Today";
+            elseif($differenceinday<=30)return $differenceinday." days";
+            elseif($differenceinday>30){
+                
+                $month=$differenceinday/3;
+                if ($month<=12) {
+                    return floor($month)." months";
+                }
+
+                elseif($month>12){
+                    $year=$month/12;
+                    return floor($year)." years";
+                }
+            
+            }
+    
+}
+   
+
+
+
+
+?>

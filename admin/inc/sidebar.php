@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">
+                        <a class="nav-link" href="logistics">
                             <i class="ni ni-key-25 text-info"></i>
                             <span class="nav-link-text">Document logistics</span>
                         </a>

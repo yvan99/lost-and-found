@@ -4,6 +4,10 @@ $claim = unhash($_GET['claim']);
 $report = select('*', 'document_found,client,branch,claim', "document_found.doc_id=claim.doc_id AND claim.cli_id=client.cli_id  AND claim.claim_branch=branch.bra_id AND claim.claim_id='$claim'");
 foreach ($report as $claimRow) {
     $nearBranch = $claimRow['bra_id'];
+    $client = $claimRow['cli_id'];
+    $claimTel = $claimRow['claim_tel'];
+    $claimer  = $claimRow['claim_names'];
+    $claimAddress = $claimRow['claim_address'];
 }
 ?>
 
@@ -54,60 +58,77 @@ foreach ($report as $claimRow) {
                             </div>
                         </div>
                         <div class="card-body">
-                            <form>
-                                <h6 class="heading-small text-muted mb-4">Client information</h6>
-                                <div class="pl-lg-4">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-username">Client Names</label>
-                                                <input type="text" id="input-username" class="form-control"  value="<?php echo $claimRow['cli_fname'] . ' ' . $claimRow['cli_lname'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="form-control-label" for="input-email">Email address</label>
-                                                <input type="email" id="input-email" class="form-control"  value="<?php echo $claimRow['cli_email']; ?>">
-                                            </div>
-                                        </div>
 
+                            <h6 class="heading-small text-muted mb-4">Client information</h6>
+                            <div class="pl-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-username">Client Names</label>
+                                            <input type="text" id="input-username" class="form-control" value="<?php echo $claimRow['cli_fname'] . ' ' . $claimRow['cli_lname'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-email">Email address</label>
+                                            <input type="email" id="input-email" class="form-control" value="<?php echo $claimRow['cli_email']; ?>">
+                                        </div>
                                     </div>
 
                                 </div>
-                                <hr class="my-4" />
-                                <!-- Address -->
-                                <h6 class="heading-small mb-4">DOCUMENT DELIVERY INFORMATION</h6>
-                                <form method="POST">
-                                    <div class="pl-lg-4">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="input-address">Nearest client branch</label>
-                                                    <input id="input-address" class="form-control" placeholder="Home Address" value="<?php echo $claimRow['bra_name'] ?>" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-7">
-                                                <div class="form-group">
-                                                    <label class="form-control-label" for="input-city">Available Logistic agents to assign</label>
 
-                                                    <select name="docType" class='form-control'>
-                                                        <option selected >Choose agent</option>
-                                                        <?php $sel = select('*', 'agent', "bra_id='$nearBranch'");
-                                                        foreach ($sel as $agent) :
-                                                        ?>
-                                                            <option value="<?php echo  $agent['agent_id'] ?>"><?php echo  $agent['agent_fullnames']?></option>
-                                                        <?php endforeach ?>
-                                                    </select>
-                                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <!-- Address -->
+                            <h6 class="heading-small mb-4">DOCUMENT DELIVERY INFORMATION</h6>
+                            <?php
+                            if (isset($_POST['deliverConfirm'])) {
+                                @$agent = $_POST['deliverLogistic'];
+                                if (!empty($agent)) {
+                                    $callAgent = new agent();
+                                    $callAgent->assignDelivery($agent, $claim, $claimAddress, $claimer, $claimTel);
+                                }
+                                else{
+                                   echo $message = '<div class="alert alert-danger alert-dismissible fade show col-12" role="alert">
+                                    <strong>Empty fields found</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                      </div>';
+                                }
+                            }
+                            ?>
+                            <form method="POST">
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-address">Nearest client branch</label>
+                                                <input id="input-address" class="form-control" placeholder="Home Address" value="<?php echo $claimRow['bra_name'] ?>" type="text">
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="col-lg-7">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-city">Available Logistic agents to assign</label>
 
-                                            <button type="submit"  class="btn btn-lg btn-primary">CONFIRM DELIVERY</button>
+                                                <select name="deliverLogistic" class='form-control'>
+                                                    <option selected>Choose agent</option>
+                                                    <?php $sel = select('*', 'agent', "bra_id='$nearBranch'");
+                                                    foreach ($sel as $agent) :
+                                                    ?>
+                                                        <option selected disabled>Choose agent</option>
+                                                        <option value="<?php echo  $agent['agent_id'] ?>"><?php echo  $agent['agent_fullnames'] ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
 
-                                </form>
+                                        <button type="submit" name="deliverConfirm" class="btn btn-lg btn-primary">CONFIRM DELIVERY</button>
+                                    </div>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>

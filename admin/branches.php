@@ -60,6 +60,27 @@ require_once 'inc/server.php';
                             </button>
 
                         </div>
+                        <?php
+                        if (isset($_POST['saveBranch'])) {
+                            $branchCode     = escape($_POST['bracode']);
+                            $branchName     = escape($_POST['braName']);
+
+                            if (empty($branchCode) || empty($branchName)) {
+                                $message = '<div class="alert alert-danger alert-dismissible fade show col-6 offset-5" role="alert">
+                                <strong> Empty fields found</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                  </div>';
+                                echo $message;
+
+                            } else {
+
+                                $callAgentClass = new agent();
+                                $callAgentClass->registerBranch($branchName, $branchCode);
+                            }
+                        }
+?>
+                        
                         <!-- Light table -->
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush">
@@ -114,7 +135,8 @@ require_once 'inc/server.php';
                         <form method="POST">
                             <div class="form-group">
                                 <label for="example-text-input" class="form-control-label">Branch Code</label>
-                                <input class="form-control" type="text" value="BRANCH CODE HERE" disabled id="example-text-input">
+                                <input class="form-control" type="text" value="<?php echo 'BRA'.verificationToken()?>" disabled id="example-text-input">
+                                <input class="form-control" type="text" name="bracode" hidden value="<?php echo 'BRA' . verificationToken(); ?>">
                             </div>
 
                             <div class="form-group">
@@ -122,13 +144,14 @@ require_once 'inc/server.php';
                                 <input class="form-control" type="text" name="braName" required id="example-text-input">
                             </div>
 
-                        </form>
+                     
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         <button type="submit" name="saveBranch" class="btn btn-success">Save Branch</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <!-- Argon Scripts -->

@@ -158,7 +158,7 @@ require_once 'inc/server.php';
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Delivered Docs</h5>
-                                                <span class="h2 font-weight-bold mb-0">N/A</span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo $successDelivery ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -180,8 +180,8 @@ require_once 'inc/server.php';
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-uppercase text-muted mb-0">Pending Deliver</h5>
-                                                <span class="h2 font-weight-bold mb-0">N/A</span>
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Pending Delivery</h5>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo $pendingDelivery ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">

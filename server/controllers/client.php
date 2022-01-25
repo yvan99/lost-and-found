@@ -24,7 +24,7 @@ function signup()
     $hashedpassword = create_hash($this->password);
 
     //this will hash password
-    $affectedRow = countAffectedRows('client', "cli_email= '$this->email'");
+    $affectedRow = countAffectedRows('client', "cli_email= '$this->email' and cli_status=1");
 
     //$affectedRow will verify if email is already registerd
 
@@ -52,7 +52,7 @@ function signup()
         Kindly Regards,<br> lost&found support team <br><br></td></tr>
         </table>`';
       resetpasswordmail($this->email, $userBody, 'account verification');
-      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user=' . actor($token) . '"}, 1000);' . "</script>";
+      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user=' . $this->email. '"}, 1000);' . "</script>";
     } else {
       $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong> Email is already taken</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">

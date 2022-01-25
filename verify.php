@@ -1,11 +1,18 @@
 <?php
 require_once 'inc/server.php';
 ## verify account
-$getToken   = unhash($_GET['user']);
-if (!$getToken) {
+$getEmail   = $_GET['user'];
+if (!$getEmail) {
   # check some hacks...
   header('location:logout');
-} ?>
+} 
+else{
+  @$seletMail  = select('*','client',"cli_email='$getEmail' and cli_status=0");
+  foreach ($seletMail as $client) {
+    $token  =  $client['cli_token'];
+  }
+}
+?>
 <?php
 if (isset($_POST['btn-submit'])) {
   $number_1 = escape($_POST['num_1']);
@@ -15,12 +22,12 @@ if (isset($_POST['btn-submit'])) {
   $number_5 = escape($_POST['num_5']);
   $number_6 = escape($_POST['num_6']);
   $combiner = $number_1 . $number_2 . $number_3 . $number_4 . $number_5 . $number_6;
-  if ($combiner != $getToken) {
+  if ($combiner != $token) {
     $message = '<div class="status-userNotCreated">
-    <strong> Sorry ,your token is not matchinh the one we sent you , Try again </strong>
+    <strong> Sorry ,your token is not matching the one we sent you , Try again </strong>
 </div>';
   } else {
-    update('client', 'cli_status=:status', "cli_token='$getToken'", ['status' => 1]);
+    update('client', 'cli_status=:status', "cli_email='$getEmail'", ['status' => 1]);
     $message = '<div class="status-userCreated">
               <strong> Account activated successfully , Redirecting you back to the system </strong>
           </div>';

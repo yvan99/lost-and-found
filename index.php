@@ -15,8 +15,8 @@ require 'inc/css.php';
                 <div class="dez-bnr-inr-entry align-m">
 					<div class="find-job-bx">
 						
-						<!-- <a href="javascript:void(0);" class="site-button button-sm">Find Jobs, Employment & Career Opportunities</a> -->
-						<h2 class="text-white offset-3"> <img src="assets/homepage/images/icons/search.png" alt=""> Find your document</h2>
+						 <a href="javascript:void(0);" class="button-lg offset-3 btn-warning rounded mb-2">Lost and Found Management Information System</a> 
+						<h4 class="text-white offset-4 mt-5"> <img src="assets/homepage/images/icons/search.png" alt=""> Find your document</h2>
 						<form class="dezPlaceAni offset-2" method="POST">
 							<div class="row">
 								<div class="col-lg-9 col-md-6">
@@ -44,7 +44,7 @@ require 'inc/css.php';
 			<div class="container">
 				<div class="section-head d-flex head-counter clearfix">
 					<div class="mr-auto">
-						<h2 class="m-b5">Browse Popular Categories</h2>
+						<h2 class="m-b5">Documents Categories</h2>
 						<!-- <h6 class="fw3">20+ Catetories work wating for you</h6> -->
 					</div>
 					<!-- <div class="head-counter-bx">
@@ -68,7 +68,7 @@ require 'inc/css.php';
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="icon-bx-wraper">
 							<div class="icon-content">
-								<a href="category?cate=<?php echo actor($category['doctype_id'])?>" class="dez-tilte"><?php echo $category['doctype_name'] ?></a>
+								<a href="#" class="dez-tilte"><?php echo $category['doctype_name'] ?></a>
 								<!-- <p class="m-a0">198 Open Positions</p> -->
 							 
 							</div>

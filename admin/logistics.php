@@ -72,7 +72,7 @@ require_once 'inc/server.php';
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Complete delivery</h5>
-                                                <span class="h2 font-weight-bold mb-0"><?php echo $successDelivery?></span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo $successDelivery ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -96,7 +96,7 @@ require_once 'inc/server.php';
 
 
         </div>
-        <div class="container-fluid mt--4">
+        <div class="container-fluid mt--4 p-3">
             <div class="row">
                 <div class="col">
                     <div class="card">
@@ -106,8 +106,8 @@ require_once 'inc/server.php';
 
                         </div>
                         <!-- Light table -->
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush p-3" id="myTable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -118,6 +118,7 @@ require_once 'inc/server.php';
                                         <th>Assigned Agent</th>
                                         <th>Assigned On</th>
                                         <th>Status</th>
+                                        <th></th>
 
                                     </tr>
                                 </thead>
@@ -131,7 +132,7 @@ require_once 'inc/server.php';
                                         <tr>
                                             <td class="order-id text-primary"> <?php echo $counter; ?> </td>
                                             <td class="amount text-primary"><?php echo $myClaims['doc_serialcode'] ?></td>
-                                            <td class="date"><?php echo $myClaims['claim_names']?></td>
+                                            <td class="date"><?php echo $myClaims['claim_names'] ?></td>
                                             <td class="transfer"><?php echo $myClaims['claim_address'] ?></td>
                                             <td class="transfer"><?php echo $myClaims['claim_tel'] ?></td>
                                             <td class="transfer"><?php echo $myClaims['agent_fullnames'] ?></td>
@@ -142,11 +143,12 @@ require_once 'inc/server.php';
                                                 <td class="text-warning">PENDING...</td>
                                             <?php } elseif ($myClaims['docd_status'] == '1') {
                                             ?>
-                                                <td class="text-warning">DELIVERED</td>
+                                                <td class="text-success">DELIVERED</td>
                                             <?php } else { ?>
                                                 <td class="text-success">Document Delivered</td>
-                                            <?php } ?>
-                                            
+                                    <?php }  if($myClaims['docd_status'] !=1 ){ ?>
+                                            <td> <a href="confirmdelivery?delivery=<?php echo actor($myClaims['docd_id']); ?>" class="btn btn-sm btn-success">Confirm Delivery</a> </td>
+                                     <?php }?>
                                         </tr>
                                     <?php $counter++;
                                     } ?>

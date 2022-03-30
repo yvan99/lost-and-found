@@ -15,8 +15,9 @@ if (!$_SESSION['adminIdLost']) {
     $countFound = countAffectedRows('document_found', "1");
     $countAgents = countAffectedRows('agent', "1");
     $countClaims = countAffectedRows('claim', "1");
+    $pendingClaims = countAffectedRows('claim', "claim_status='PENDING'");
+    $paidClaims = countAffectedRows('claim', "claim_status='PAID'");
     $countDelivery = countAffectedRows('document_delivery', "1");
     $successDelivery = countAffectedRows('document_delivery', "docd_status='1'");
     $pendingDelivery = countAffectedRows('document_delivery', "docd_status='0'");
-
 }

@@ -40,7 +40,7 @@ require_once 'inc/server.php';
                                 </div>
                             </div>
 
-                            
+
                             <div class="col-xl-4 col-md-6">
                                 <div class="card card-stats">
                                     <!-- Card body -->
@@ -48,7 +48,7 @@ require_once 'inc/server.php';
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Paid claims</h5>
-                                                <span class="h2 font-weight-bold mb-0">N/A</span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo $paidClaims; ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -64,15 +64,15 @@ require_once 'inc/server.php';
                                 </div>
                             </div>
 
-                            
+
                             <div class="col-xl-4 col-md-6">
                                 <div class="card card-stats">
                                     <!-- Card body -->
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col">
-                                                <h5 class="card-title text-uppercase text-muted mb-0">Unpaid claims</h5>
-                                                <span class="h2 font-weight-bold mb-0">N/A</span>
+                                                <h5 class="card-title text-uppercase text-muted mb-0">Pending claims</h5>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo $pendingClaims; ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -106,47 +106,47 @@ require_once 'inc/server.php';
 
                         </div>
                         <!-- Light table -->
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
-                            <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>Document claimed</th>
-                            <th>Claim fee</th>
-                            <th>Delivery address</th>
-                            <th>Nearest branch</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush p-3" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Document claimed</th>
+                                        <th>Claim fee</th>
+                                        <th>Delivery address</th>
+                                        <th>Nearest branch</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
-                        <?php
-                        $report = select('*', 'document_found,client,branch,claim', "document_found.doc_id=claim.doc_id AND claim.cli_id=client.cli_id  AND claim.claim_branch=branch.bra_id ");
-                        $counter = 1;
-                        foreach ($report as $myClaims) {
+                                    <?php
+                                    $report = select('*', 'document_found,client,branch,claim', "document_found.doc_id=claim.doc_id AND claim.cli_id=client.cli_id  AND claim.claim_branch=branch.bra_id ");
+                                    $counter = 1;
+                                    foreach ($report as $myClaims) {
 
-                        ?>
-                            <tr>
-                                <td class="order-id text-primary"> <?php echo $counter; ?> </td>
-                                <td class="amount text-primary"><?php echo $myClaims['doc_serialcode'] ?></td>
-                                <td class="date"><?php echo $myClaims['claim_fees'] . ' rwf ' ?></td>
-                                <td class="transfer"><?php echo $myClaims['claim_address'] ?></td>
-                                <td class="transfer"><?php echo $myClaims['bra_name'] ?></td>
-                                <?php
-                                if ($myClaims['claim_status'] == 'PENDING') {
-                                ?>
-                                    <td class="text-warning">PENDING...</td>
-                                <?php } elseif ($myClaims['claim_status'] == 'SUCCESS') {
-                                ?>
-                                    <td class="text-warning">SUCCESS</td>
-                                <?php } else { ?>
-                                    <td class="text-success">Document Delivered</td>
-                                <?php } ?>
-                                <td><a href="claiminfo?claim=<?php echo actor($myClaims['claim_id'])?>" class="btn btn-success btn-sm">More info</a> </td>
-                            </tr>
-                        <?php $counter++;
-                        } ?>
-                    </tbody>
+                                    ?>
+                                        <tr>
+                                            <td class="order-id text-primary"> <?php echo $counter; ?> </td>
+                                            <td class="amount text-primary"><?php echo $myClaims['doc_serialcode'] ?></td>
+                                            <td class="date"><?php echo $myClaims['claim_fees'] . ' rwf ' ?></td>
+                                            <td class="transfer"><?php echo $myClaims['claim_address'] ?></td>
+                                            <td class="transfer"><?php echo $myClaims['bra_name'] ?></td>
+                                            <?php
+                                            if ($myClaims['claim_status'] == 'PENDING') {
+                                            ?>
+                                                <td class="text-warning">PENDING...</td>
+                                            <?php } elseif ($myClaims['claim_status'] == 'PAID') {
+                                            ?>
+                                                <td class="text-sucess">PAID</td>
+                                            <?php } else { ?>
+                                                <td class="text-danger">ERROR</td>
+                                            <?php } ?>
+                                            <td><a href="claiminfo?claim=<?php echo actor($myClaims['claim_id']) ?>" class="btn btn-success btn-sm">More info</a> </td>
+                                        </tr>
+                                    <?php $counter++;
+                                    } ?>
+                                </tbody>
                             </table>
                         </div>
                         <!-- Card footer -->

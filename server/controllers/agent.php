@@ -56,6 +56,7 @@ class agent
             $dataStructure = '`claim_id`, `agent_id`, `docd_date`, `docd_status`';
             $values = ':claim,:agent,:date,:status';
             insert($this->deliveryTable, $dataStructure, $values, $data);
+            
             $fetchAgent = select('*', 'agent,claim', "agent_id='$agent'");
             foreach ($fetchAgent as $agent) : endforeach;
             $smsMessage = 'Hello ' . $agent['agent_fullnames'] . ' You have been assigned a package to deliver for client ' . $claimer . ' Located at ' . $claimAddress . ' contact him/her on ' . $claimTel . ' . Please deliver the package ASAP';

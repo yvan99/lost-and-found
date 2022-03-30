@@ -58,46 +58,35 @@ require_once 'inc/server.php';
 
                         </div>
                         <!-- Light table -->
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush p-3" id="myTable">
                                 <thead class="thead-light">
-                                <tr>
-                            <th>No</th>
-                            <th>Document owner names</th>
-                            <th>Document Number</th>
-                            <th>Document type</th>
-                            <th>Lost date</th>
-                            <th>Status</th>
-                        </tr>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Document owner names</th>
+                                        <th>Document Number</th>
+                                        <th>Document type</th>
+                                        <th>Lost date</th>
+                                      
+                                    </tr>
                                 </thead>
 
                                 <tbody>
-                        <?php
-                        $report = select('*', 'document_lost,document_type', "document_lost.doctype_id=document_type.doctype_id");
-                        $counter = 1;
-                        foreach ($report as $myReport) {
-
-                        ?>
-                            <tr>
-                                <td class="order-id text-primary"> <?php echo $counter; ?> </td>
-                                <td class="job-name"><a><?php echo $myReport['doc_fullnames'] ?></a></td>
-                                <td class="amount text-primary"><?php echo $myReport['doc_serialcode'] ?></td>
-                                <td class="date"><?php echo $myReport['doctype_name'] ?></td>
-                                <td class="transfer"><?php echo $myReport['doc_createdDate'] ?></td>
-                                <?php
-                                if ($myReport['doc_status'] == 0) {
-                                ?>
-                                    <td class="badge badge-pill badge-sm badge-danger">Not found</td>
-                                <?php } elseif ($myReport['doc_status'] == 9) {
-                                ?>
-                                    <td class="badge badge-pill badge-sm badge-success">Document found</td>
-                                <?php } else { ?>
-                                    <td class="text-success">Document Delivered</td>
-                                <?php } ?>
-                            </tr>
-                        <?php $counter++;
-                        } ?>
-                    </tbody>
+                                    <?php
+                                    $report = select('*', 'document_lost,document_type', "document_lost.doctype_id=document_type.doctype_id");
+                                    $counter = 1;
+                                    foreach ($report as $myReport) {
+                                    ?>
+                                        <tr>
+                                            <td class="order-id text-primary"> <?php echo $counter; ?> </td>
+                                            <td class="job-name"><a><?php echo $myReport['doc_fullnames'] ?></a></td>
+                                            <td class="amount text-primary"><?php echo $myReport['doc_serialcode'] ?></td>
+                                            <td class="date"><?php echo $myReport['doctype_name'] ?></td>
+                                            <td class="transfer"><?php echo $myReport['doc_createdDate'] ?></td>
+                                        </tr>
+                                    <?php $counter++;
+                                    } ?>
+                                </tbody>
                             </table>
                         </div>
                         <!-- Card footer -->

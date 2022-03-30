@@ -82,8 +82,8 @@ require_once 'inc/server.php';
 ?>
                         
                         <!-- Light table -->
-                        <div class="table-responsive">
-                            <table class="table align-items-center table-flush">
+                        <div class="table-responsive p-3">
+                            <table class="table align-items-center table-flush p-3" id="myTable">
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col" class="sort" data-sort="name">#</th>

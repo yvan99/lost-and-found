@@ -4,9 +4,9 @@ $claim = unhash($_GET['claim']);
 $report = select('*', 'document_found,client,branch,claim', "document_found.doc_id=claim.doc_id AND claim.cli_id=client.cli_id  AND claim.claim_branch=branch.bra_id AND claim.claim_id='$claim'");
 foreach ($report as $claimRow) {
     $nearBranch = $claimRow['bra_id'];
-    $client = $claimRow['cli_id'];
-    $claimTel = $claimRow['claim_tel'];
-    $claimer  = $claimRow['claim_names'];
+    $client     = $claimRow['cli_id'];
+    $claimTel   = $claimRow['claim_tel'];
+    $claimer    = $claimRow['claim_names'];
     $claimAddress = $claimRow['claim_address'];
 }
 ?>
@@ -28,12 +28,12 @@ foreach ($report as $claimRow) {
                         <div class="col-lg-12 col-md-10">
                             <h1 class="display-2 text-white"><?php echo $claimRow['doc_serialcode'] ?></h1>
                             <p class="text-white mt-0 mb-5">Transaction ref : <?php echo $claimRow['claim_ref'] ?></p>
-                            <?php if ($claimRow['claim_status'] == 'SUCCESS') {
+                            <?php if ($claimRow['claim_status'] == 'PAID') {
                             ?>
                                 <a href="#!" class="btn btn-success">PAID</a>
                             <?php } else {
-                                $display = 'display:non'; ?>
-                                <a href="#!" class="btn btn-danger">NOT PAID</a> <?php } ?>
+                                @$display = 'display:none'; ?>
+                                <a href="#!" class="btn btn-danger">PENDING PAYMENT</a> <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@ foreach ($report as $claimRow) {
         <!-- Page content -->
         <div class="container-fluid mt--6">
             <div class="row">
-                <div class="col-xl-5 order-xl-1">
+                <div class="col-xl-5 order-xl-1" style="<?php echo @$display; ?>">
                     <div class="card card-profile">
                         <img src="../access/files/<?php echo $claimRow['doc_photo'] ?>" alt="Image placeholder" class="card-img-top">
                     </div>
@@ -87,9 +87,8 @@ foreach ($report as $claimRow) {
                                 if (!empty($agent)) {
                                     $callAgent = new agent();
                                     $callAgent->assignDelivery($agent, $claim, $claimAddress, $claimer, $claimTel);
-                                }
-                                else{
-                                   echo $message = '<div class="alert alert-danger alert-dismissible fade show col-12" role="alert">
+                                } else {
+                                    echo $message = '<div class="alert alert-danger alert-dismissible fade show col-12" role="alert">
                                     <strong>Empty fields found</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
@@ -115,7 +114,7 @@ foreach ($report as $claimRow) {
                                                     <?php $sel = select('*', 'agent', "bra_id='$nearBranch'");
                                                     foreach ($sel as $agent) :
                                                     ?>
-                                                        <option selected disabled>Choose agent</option>
+
                                                         <option value="<?php echo  $agent['agent_id'] ?>"><?php echo  $agent['agent_fullnames'] ?></option>
                                                     <?php endforeach ?>
                                                 </select>

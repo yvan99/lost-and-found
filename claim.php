@@ -2,9 +2,7 @@
 require 'inc/server.php';
 require 'inc/userCheck.php';
 require 'inc/css.php';
-
 // GET THE DOCUMENT ID HASHED
-
 $docId = unhash($_GET['doc']);
 
 // FETCH RELATED DOCUMENT DATA
@@ -23,17 +21,16 @@ if (!isset($_SESSION['clientIdLost']) || !$docId || !$selectDoc) {
     endforeach;
 }
 
-$fees=100;
-if (isset($_POST['submitClaim'])){
+$fees = 100;
+if (isset($_POST['submitClaim'])) {
 
-$comment=$_POST['comment'];
-$names=$_POST['names'];
-$address=$_POST['address'];
-$branch=$_POST['branch'];
-$tel=$_POST['tel'];
-$momo=$_POST['momo'];
-$claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$momo);
-
+    $comment = $_POST['comment'];
+    $names = $_POST['names'];
+    $address = $_POST['address'];
+    $branch = $_POST['branch'];
+    $tel = $_POST['tel'];
+    $momo = $_POST['momo'];
+    $claimResults = claim($userId, $docId, $fees, $comment, $names, $address, $branch, $tel, $momo);
 }
 ?>
 
@@ -60,8 +57,7 @@ $claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$
 
                                             </div>
                                             <div class="candidate-title">
-                                                <h4 class="m-b5"><a
-                                                        href="javascript:void(0);"><?php echo $docName ?></a></h4>
+                                                <h4 class="m-b5"><a href="javascript:void(0);"><?php echo $docName ?></a></h4>
                                             </div>
                                         </div>
                                         <ul>
@@ -101,8 +97,7 @@ $claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$
                                             <div class="col-lg-6 col-md-6">
                                                 <div class="form-group">
                                                     <label>What is your address / Street number ?</label>
-                                                    <input required type="text" class="form-control"
-                                                        placeholder="Ex : Kigali , Nyamirambo KN 56ST" name="address">
+                                                    <input required type="text" class="form-control" placeholder="Ex : Kigali , Nyamirambo KN 56ST" name="address">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
@@ -113,8 +108,8 @@ $claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$
                                                         <?php $sel = select('*', 'branch', '1');
                                                         foreach ($sel as $cate) :
                                                         ?>
-                                                        <option value="<?php echo  $cate['bra_id'] ?>">
-                                                            <?php echo  $cate['bra_name'] ?></option>
+                                                            <option value="<?php echo  $cate['bra_id'] ?>">
+                                                                <?php echo  $cate['bra_name'] ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -136,25 +131,20 @@ $claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$
                                             <div class="col-lg-5 col-md-6">
                                                 <div class="form-group">
                                                     <label>Service charge fee(RWF)</label><br>
-                                                    <input type="text" name="fees" class="form-control" disabled
-                                                        value="<?php echo $fees;?>">
+                                                    <input type="text" name="fees" class="form-control" disabled value="<?php echo $fees; ?>">
 
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-7 col-md-6">
                                                 <div class="form-group">
-                                                    <label>Payment method <img
-                                                            src="assets/homepage/images/icons/momo.jpg"
-                                                            style="width: 50px;" alt=""></label>
-                                                    <input type="text" class="form-control" disabled
-                                                        value="MTN MOBILE MONEY">
+                                                    <label>Payment method <img src="assets/homepage/images/icons/momo.jpg" style="width: 50px;" alt=""></label>
+                                                    <input type="text" class="form-control" disabled value="MTN MOBILE MONEY">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>Enter your mobile money number</label>
-                                                <input type="number" style="font-size: 30px;" class="form-control"
-                                                    name="momo" required>
+                                                <input type="number" style="font-size: 30px;" class="form-control" name="momo" required>
                                             </div>
 
 
@@ -170,16 +160,14 @@ $claimResults=claim($userId,$docId,$fees,$comment,$names,$address,$branch,$tel,$
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="job-alert-check" name="docAgree" required>
+                                                        <input type="checkbox" class="custom-control-input" id="job-alert-check" name="docAgree" required>
                                                         <label class="custom-control-label" for="job-alert-check">I
                                                             agree to the Terms and Conditions and Privacy Policy</label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="submit" class="site-button m-b30" name="submitClaim"
-                                            value="Confirm your claim">
+                                        <input type="submit" class="site-button m-b30" name="submitClaim" value="Confirm your claim">
 
                                     </form>
                                 </div>

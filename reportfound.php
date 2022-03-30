@@ -1,4 +1,4 @@
-<?php 
+<?php
 require 'inc/server.php';
 require 'inc/userCheck.php';
 require 'inc/css.php';
@@ -13,8 +13,7 @@ require 'inc/css.php';
             <div class="container">
                 <ul class="nav nav-tabs nav-tabs-1" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link site-button active" id="tabPersonal" data-toggle="tab" href="#personal"
-                            role="tab" aria-controls="personal" aria-selected="true">Report found document</a>
+                        <a class="nav-link site-button active" id="tabPersonal" data-toggle="tab" href="#personal" role="tab" aria-controls="personal" aria-selected="true">Report found document</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -31,14 +30,14 @@ require 'inc/css.php';
                                         @$repoLocation = escape($_POST['docLoc']);
                                         @$file    = $_FILES["docPhoto"]["name"];
                                         @$tmp     = $_FILES['docPhoto']['tmp_name'];
-                                        if (empty($repoName) || empty($file)|| empty($repoId) || empty($repoType) || empty($repoLocation) || empty($file)) {
+                                        if (empty($repoName) || empty($file) || empty($repoId) || empty($repoType) || empty($repoLocation) || empty($file)) {
                                             echo $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
                                           <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                               <span aria-hidden="true">×</span>
                                           </button>
                                       </div>';
                                         } else {
-                                            echo reportFound($tmp,$file,$folder,$repoName, $repoId, $repoType, $repoLocation, $userId);
+                                            echo reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoLocation, $userId);
                                         }
                                     }
                                     ?>
@@ -68,8 +67,8 @@ require 'inc/css.php';
                                                         <?php $sel = select('*', 'document_type', '1');
                                                         foreach ($sel as $cate) :
                                                         ?>
-                                                        <option value="<?php echo  $cate['doctype_id'] ?>">
-                                                            <?php echo  $cate['doctype_name'] ?></option>
+                                                            <option value="<?php echo  $cate['doctype_id'] ?>">
+                                                                <?php echo  $cate['doctype_name'] ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -82,8 +81,8 @@ require 'inc/css.php';
                                                         <?php $sel = select('*', 'branch', '1');
                                                         foreach ($sel as $cate) :
                                                         ?>
-                                                        <option value="<?php echo  $cate['bra_id'] ?>">
-                                                            <?php echo  $cate['bra_name'] ?></option>
+                                                            <option value="<?php echo  $cate['bra_id'] ?>">
+                                                                <?php echo  $cate['bra_name'] ?></option>
                                                         <?php endforeach ?>
                                                     </select>
                                                 </div>
@@ -98,39 +97,32 @@ require 'inc/css.php';
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input"
-                                                            id="job-alert-check" name="docAgree">
+                                                        <input type="checkbox" class="custom-control-input" id="job-alert-check" name="docAgree">
                                                         <label class="custom-control-label" for="job-alert-check">I
                                                             agree to the Terms and Conditions and Privacy Policy</label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 text-center">
-                                                <button class="site-button" type="submit" name="reportFound">Report
-                                                    Now</button>
+                                                <a href="./" class="btn btn-dark">Return home</a>
+                                                <button class="site-button" type="submit" name="reportFound">Report Now</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="col-lg-4 bg-gray">
                                     <div class="p-a25">
-                                        <h6>Why should you create a job alert</h6>
+                                        <h6>Report found document</h6>
                                         <ul class="list-check primary">
-                                            <li>Get relevant jobs directly in your inbox</li>
-                                            <li>Stay updated with latest opportunities</li>
-                                            <li>Be the first one to apply</li>
-                                            <li>Create up to 5 personalized job alerts</li>
+                                            <li>Thank you for working for us, your participation is appreciated</li>
+                                            <li>Make sure you provide correct information</li>
+                                            <li>Make sure you have a scanned document in your device</li>
                                         </ul>
                                         <div class="dez-divider bg-gray-dark"></div>
-                                        <h6 class="font-14">Why <a href="../cdn-cgi/l/email-protection.html"
-                                                class="__cf_email__"
-                                                data-cfemail="aec7c0c8c1eecbd6cfc3dec2cb80cdc1c3">[email&#160;protected]</a>
+                                        <h6 class="font-14">Stay tuned
                                         </h6>
-                                        <p class="m-b10"><strong class="text-black m-r10">800,000+ </strong> Jobs</p>
-                                        <p class="m-b10"><strong class="text-black m-r10">100,000+</strong> CV searches
-                                            daily</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry has
-                                            been the industry.</p>
+                                        <p class="m-b10">Lost and found here for our people</p>
+
                                     </div>
                                 </div>
                             </div>

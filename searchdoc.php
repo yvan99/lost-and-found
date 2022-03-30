@@ -1,7 +1,7 @@
 <?php
 require 'inc/server.php';
 if (!empty($_POST["keyword"])) {
-    $query = select('*', 'document_found', "doc_fullnames like '" . '%' . $_POST["keyword"] . "%' and doc_status='0'LIMIT 0,6");
+    $query = select('*', 'document_found,claim', "doc_fullnames like '" . '%' . $_POST["keyword"] . "%' and doc_status='0' LIMIT 0,6");
     if (!empty($query) && $query) {
 ?>
         <table id="country-list" border="0">

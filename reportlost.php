@@ -104,18 +104,16 @@ require 'inc/css.php';
                                 </div>
                                 <div class="col-lg-4 bg-gray">
                                     <div class="p-a25">
-                                        <h6>Why should you create a job alert</h6>
+                                        <h6>Report your lost document</h6>
                                         <ul class="list-check primary">
-                                            <li>Get relevant jobs directly in your inbox</li>
-                                            <li>Stay updated with latest opportunities</li>
-                                            <li>Be the first one to apply</li>
-                                            <li>Create up to 5 personalized job alerts</li>
+                                            <li>Make sure you have searched it before to see if it is not yet found</li>
+                                            <li>Provide correct information</li>
+                                            <li>Report a document of which you have a proof that it is yours</li>
+                                            <li>You will be notified in case your documents are found</li>
                                         </ul>
                                         <div class="dez-divider bg-gray-dark"></div>
-                                        <h6 class="font-14">Why <a href="../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="aec7c0c8c1eecbd6cfc3dec2cb80cdc1c3">[email&#160;protected]</a></h6>
-                                        <p class="m-b10"><strong class="text-black m-r10">800,000+ </strong> Jobs</p>
-                                        <p class="m-b10"><strong class="text-black m-r10">100,000+</strong> CV searches daily</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry has been the industry.</p>
+                                        <h6 class="font-14">Stay tuned</h6>
+                                        <p class="m-b10">Lost and found here for our people</p>
                                     </div>
                                 </div>
                             </div>

@@ -11,15 +11,15 @@ class client
   public $password;
 
   function __construct($fname = null, $lname = null, $phone = null, $email = null, $password = null)
-{
+  {
     $this->fname = escape($fname);
     $this->lname = escape($lname);
     $this->phone = escape($phone);
     $this->email = escape($email);
     $this->password = escape($password);
-}
+  }
 
-function signup()
+  function signup()
   {
     $hashedpassword = create_hash($this->password);
 
@@ -52,7 +52,7 @@ function signup()
         Kindly Regards,<br> lost&found support team <br><br></td></tr>
         </table>`';
       resetpasswordmail($this->email, $userBody, 'account verification');
-      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user=' . $this->email. '"}, 1000);' . "</script>";
+      echo "<script>" . 'setTimeout(function(){ window.location = "verify?user=' . $this->email . '"}, 1000);' . "</script>";
     } else {
       $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong> Email is already taken</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -63,7 +63,7 @@ function signup()
     }
   }
 
-function signin($email, $password)
+  function signin($email, $password)
   {
 
     $email = escape($email);
@@ -99,13 +99,13 @@ function signin($email, $password)
     }
   }
 
-function logout()
+  function logout()
   {
     destroy_session();
     return true; //
   }
 
-function resetpassword($email)
+  function resetpassword($email)
   {
     $email = escape($email);
     $count = countAffectedRows('admin', "adm_email='$email' and adm_status = 1");
@@ -203,37 +203,37 @@ function Acceptedpassword()
 function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $user)
 {
 
-            $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
-            $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
-            if ($countSimilar) {
-              return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+  $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
+  if ($countSimilar) {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
           </div>';
-            } elseif ($countDocId) {
-              return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  } elseif ($countDocId) {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
             <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
           </div>';
-          } elseif (!$countSimilar && !$countDocId) {
-            $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
-            $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
-            $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
-            insert('document_lost', $datastracture, $values, $data);
-            return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
+  } elseif (!$countSimilar && !$countDocId) {
+    $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
+    $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
+    $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
+    insert('document_lost', $datastracture, $values, $data);
+    return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
           <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">×</span>
           </button>
         </div>';
-          } else {
-            return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  } else {
+    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
           <strong>Something went wrong</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">×</span>
           </button>
         </div>';
-          }
+  }
 }
 function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoLocation, $user)
 {
@@ -286,95 +286,83 @@ function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoL
   }
 }
 
-function claim($client,$doc,$fees,$comment=null,$names,$address,$branch,$tel,$momo)
+function claim($client, $doc, $fees, $comment = null, $names, $address, $branch, $tel, $momo)
 {
-    $affectedRow = countAffectedRows('claim', "cli_id= '$client' and doc_id='$doc' and claim_status='SUCCESS'");
-    if ($affectedRow == 0) {
-      $refId=reference1();
-      
-        $data = [ 'cli_id'=>$client, 'doc_id'=>$doc,'claim_ref'=>$refId, 'claim_fees'=>$fees, 'claim_comment'=>$comment, 'claim_names'=>$names, 'claim_address'=>$address, 'Claim_branch'=>$branch, 'claim_tel'=>$tel, 'claim_status'=>'PENDING'];
+  $affectedRow = countAffectedRows('claim', "cli_id= '$client' and doc_id='$doc' and claim_status='SUCCESS'");
+  if ($affectedRow == 0) {
+    $refId = reference1();
 
-        //$data array will store data to be inserted
-        $dataStructure = 'cli_id, doc_id,claim_ref, claim_fees, claim_comment, claim_names, claim_address, Claim_branch, claim_tel, claim_status';
-        //$dataStructure will hold datastructure of table
-        $values = ' :cli_id, :doc_id,:claim_ref, :claim_fees, :claim_comment, :claim_names, :claim_address, :Claim_branch, :claim_tel, :claim_status';
-        insert('claim', $dataStructure, $values, $data);
+    $data = ['cli_id' => $client, 'doc_id' => $doc, 'claim_ref' => $refId, 'claim_fees' => $fees, 'claim_comment' => $comment, 'claim_names' => $names, 'claim_address' => $address, 'Claim_branch' => $branch, 'claim_tel' => $tel, 'claim_status' => 'PENDING'];
 
-         //flutterwave payment
-         $redirectUrl='http://localhost/lost-and-found/approve'; 
-         payment($fees,$momo,$names,$redirectUrl,$refId);
-          
-
-        return true;
-    }
-    else
-    {
-     echo $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    //$data array will store data to be inserted
+    $dataStructure = 'cli_id, doc_id,claim_ref, claim_fees, claim_comment, claim_names, claim_address, Claim_branch, claim_tel, claim_status';
+    //$dataStructure will hold datastructure of table
+    $values = ' :cli_id, :doc_id,:claim_ref, :claim_fees, :claim_comment, :claim_names, :claim_address, :Claim_branch, :claim_tel, :claim_status';
+    insert('claim', $dataStructure, $values, $data);
+    update('document_found', 'doc_status=:doc_status', "doc_id='$doc'", ['doc_status' => '1',]);
+    //flutterwave payment
+    $redirectUrl = 'http://localhost/lost-and-found/approve';
+    payment($fees, $momo, $names, $redirectUrl, $refId);
+    return true;
+  } else {
+    echo $message = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
       <strong> Claim is already received</strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">×</span>
       </button>
         </div>';
-
-    }
+  }
 }
 
-function FoundNotification($fullNames,$docId,$docType)
+function FoundNotification($fullNames, $docId, $docType)
 {
   //best matches 1.same doc type and doc id 
 
-  $CountBest=countAffectedRows('document_found',"doctype_id ='$docType' and doc_serialcode='$docId' and doc_status='0'");
+  $CountBest = countAffectedRows('document_found', "doctype_id ='$docType' and doc_serialcode='$docId' and doc_status='0'");
   //worst matches 1.same id or doc owner name  
-  $CountWorst=countAffectedRows('document_found',"doc_fullnames ='$fullNames' or doc_serialcode='$docId' and doc_status='0'");
-  $result=['best'=>null,'worst'=>null];
-  
-  if($CountBest == 1 ){
-  
-    $SelectBest=select('*','document_found',"doctype_id ='$docType' and doc_serialcode='$docId' and doc_status='0'");
-    $result['best']=$SelectBest;
-    }
-   if($CountWorst>0){
-    $SelectWorst=select('*','document_found',"(doc_fullnames ='$fullNames' and (doc_serialcode='$docId' and doctype_id <>'$docType' )) or (doc_fullnames ='$fullNames' and (doc_serialcode<>'$docId' and doctype_id ='$docType' )) or (doc_fullnames ='$fullNames' and (doc_serialcode<>'$docId' and doctype_id <>'$docType' )) and doc_status='0'");
-    $result['worst']=$SelectWorst;
-    }
-  else return false;
-   
-  return $result;
+  $CountWorst = countAffectedRows('document_found', "doc_fullnames ='$fullNames' or doc_serialcode='$docId' and doc_status='0'");
+  $result = ['best' => null, 'worst' => null];
 
+  if ($CountBest == 1) {
+
+    $SelectBest = select('*', 'document_found', "doctype_id ='$docType' and doc_serialcode='$docId' and doc_status='0'");
+    $result['best'] = $SelectBest;
+  }
+  if ($CountWorst > 0) {
+    $SelectWorst = select('*', 'document_found', "(doc_fullnames ='$fullNames' and (doc_serialcode='$docId' and doctype_id <>'$docType' )) or (doc_fullnames ='$fullNames' and (doc_serialcode<>'$docId' and doctype_id ='$docType' )) or (doc_fullnames ='$fullNames' and (doc_serialcode<>'$docId' and doctype_id <>'$docType' )) and doc_status='0'");
+    $result['worst'] = $SelectWorst;
+  } else return false;
+
+  return $result;
 }
-   
+
 function NotificationIteration($userId)
 {
-    $countLostDoc=countAffectedRows("document_lost", "doc_founder= '$userId' and  doc_status=0");
-    if ($countLostDoc > 0) {
-        $SelectLostDoc=select("*", "document_lost", "doc_founder= '$userId' and  doc_status= 0");
-        foreach ($SelectLostDoc as $lostDoc) {
-            $fullNames=$lostDoc['doc_fullnames'];
-            $docId=$lostDoc['doc_serialcode'];
-            $docType=$lostDoc['doctype_id'];
-            $result=FoundNotification($fullNames, $docId, $docType);
-            if ($result) {
-                echo "lost document with number".$docId;
-            }
+  $countLostDoc = countAffectedRows("document_lost", "doc_founder= '$userId' and  doc_status=0");
+  if ($countLostDoc > 0) {
+    $SelectLostDoc = select("*", "document_lost", "doc_founder= '$userId' and  doc_status= 0");
+    foreach ($SelectLostDoc as $lostDoc) {
+      $fullNames = $lostDoc['doc_fullnames'];
+      $docId = $lostDoc['doc_serialcode'];
+      $docType = $lostDoc['doctype_id'];
+      $result = FoundNotification($fullNames, $docId, $docType);
+      if ($result) {
+        echo "lost document with number" . $docId;
+      }
 
-            if (isset($result['best'])) {
-                echo"<br> best";
-                foreach ($result['best'] as $r) {
-                    echo"<br>".($r['doc_id']);
-                }
-            }
-            
-            if (isset($result['worst'])) {
-                echo"<br> worst";
-                foreach ($result['worst'] as $r) {
-                    echo"<br>".($r['doc_id']);
-                }
-            }
-            echo"<br>";
+      if (isset($result['best'])) {
+        echo "<br> best";
+        foreach ($result['best'] as $r) {
+          echo "<br>" . ($r['doc_id']);
         }
       }
 
-  
-  else return "no document found";
-
-  
+      if (isset($result['worst'])) {
+        echo "<br> worst";
+        foreach ($result['worst'] as $r) {
+          echo "<br>" . ($r['doc_id']);
+        }
+      }
+      echo "<br>";
+    }
+  } else return "no document found";
 }

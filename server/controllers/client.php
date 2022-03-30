@@ -202,17 +202,38 @@ function Acceptedpassword()
 }
 function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $user)
 {
-
-  $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
-  $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
-  if ($countSimilar) {
-    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong> Empty fields found ,check your form </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-          </div>';
-  } elseif ($countDocId) {
-    return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+            $countSimilar = countAffectedRows('document_found', "	doc_fullnames='$repoName' OR doc_serialcode='$repoId' LIMIT 1");
+            $countDocId   = countAffectedRows('document_lost', "	doc_serialcode='$repoId' LIMIT 1");
+            if ($countSimilar) {
+              $getSimilar = select('*', 'client,document_found,document_lost', "document_found.doc_serialcode='$repoId' and document_lost.doc_founder=client.cli_id ");
+              if ($getSimilar) {
+                foreach ($getSimilar as $similar) :
+                  $userPhone = $similar['cli_phone'];
+                  $userFirst = $similar['cli_fname'];
+                  $userLast  = $similar['cli_lname'];
+                  $userIde   = $similar['cli_id'];
+                endforeach;
+                $message = "Hello " . $userFirst . ' ' . $userLast . " Someone have reported a document with the same information as what you have claimed to lost , Please visit our system to verify if it is yours";
+                # IF USER FOUND ,SEND SMS NOTIFICATION 
+                sendSms($userPhone, $message);
+                echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+              <strong> We found similar lost document , Sending notification ... </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+            </div>';
+            $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'address' => $repoAddress];
+            $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_address`';
+            $values = ':id,:type,:code,:names,:founder,:status,:date,:address';
+            insert('document_lost', $datastracture, $values, $data);
+            return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
+          <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+          </button>
+        </div>';
+              }
+            } elseif ($countDocId) {
+              return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+>>>>>>> ce0c94af842f84bca1a185687f08ba67f9be823d
             <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>
@@ -282,6 +303,21 @@ function reportFound($tmp, $file, $folder, $repoName, $repoId, $repoType, $repoL
           <span aria-hidden="true">×</span>
       </button>
     </div>';
+    }
+    else{
+      $file1 = returnMixtring() . $file;
+      $path = $folder . $file1;
+      $data = ['id' => null, 'code' => $repoId, 'type' => $repoType, 'names' => $repoName, 'founder' => $user, 'status' => 0, 'date' => $repoDate, 'photo' => $file1, 'branch' => $repoLocation];
+      $datastracture = '`doc_id`, `doctype_id`, `doc_serialcode`, `doc_fullnames`, `doc_founder`, `doc_status`, `doc_createdDate`, `doc_photo`, `bra_id`';
+      $values = ':id,:type,:code,:names,:founder,:status,:date,:photo,:branch';
+      insert('document_found', $datastracture, $values, $data);
+      move_uploaded_file($tmp, $path);
+      return   '<div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Document reported successfully </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+      </button>
+    </div>';
+
     }
   }
 }

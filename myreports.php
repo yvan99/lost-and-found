@@ -25,7 +25,7 @@ if (!$_SESSION['clientIdLost']) {
                             <th>Document Number</th>
                             <th>Document type</th>
                             <th>Lost date</th>
-                            <th>Status</th>
+                            <!-- <th>Status</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -35,23 +35,23 @@ if (!$_SESSION['clientIdLost']) {
                         foreach ($report as $myReport) {
 
                         ?>
-                            <tr>
-                                <td class="order-id text-primary"> <?php echo $counter; ?> </td>
-                                <td class="job-name"><a><?php echo $myReport['doc_fullnames'] ?></a></td>
-                                <td class="amount text-primary"><?php echo $myReport['doc_serialcode'] ?></td>
-                                <td class="date"><?php echo $myReport['doctype_name'] ?></td>
-                                <td class="transfer"><?php echo $myReport['doc_createdDate'] ?></td>
-                                <?php
+                        <tr>
+                            <td class="order-id text-primary"> <?php echo $counter; ?> </td>
+                            <td class="job-name"><a><?php echo $myReport['doc_fullnames'] ?></a></td>
+                            <td class="amount text-primary"><?php echo $myReport['doc_serialcode'] ?></td>
+                            <td class="date"><?php echo $myReport['doctype_name'] ?></td>
+                            <td class="transfer"><?php echo $myReport['doc_createdDate'] ?></td>
+                            <?php
                                 if ($myReport['doc_status'] == 0) {
                                 ?>
-                                    <td class="expired pending">Not found</td>
-                                <?php } elseif ($myReport['doc_status'] == 9) {
+                            <!-- <td class="expired pending">Not found</td> -->
+                            <?php } elseif ($myReport['doc_status'] == 9) {
                                 ?>
-                                    <td class="text-warning">Document found</td>
-                                <?php } else { ?>
-                                    <td class="text-success">Document Delivered</td>
-                                <?php } ?>
-                            </tr>
+                            <!-- <td class="text-warning">Document found</td> -->
+                            <?php } else { ?>
+                            <td class="text-success">Document Delivered</td>
+                            <?php } ?>
+                        </tr>
                         <?php $counter++;
                         } ?>
                     </tbody>
@@ -75,7 +75,7 @@ if (!$_SESSION['clientIdLost']) {
                             <th>Document Number</th>
                             <th>Document type</th>
                             <th>Lost date</th>
-                            <th>Status</th>
+                            <!-- <th>Status</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -85,21 +85,21 @@ if (!$_SESSION['clientIdLost']) {
                         foreach ($foundReport as $myFoundReport) {
 
                         ?>
-                            <tr>
-                                <td class="order-id text-primary"><?php echo $counter; ?> </td>
-                                <td class="job-name"><a><?php echo $myFoundReport['doc_fullnames'] ?></a></td>
-                                <td class="amount text-primary"><?php echo $myFoundReport['doc_serialcode'] ?></td>
-                                <td class="date"><?php echo $myFoundReport['doctype_name'] ?></td>
-                                <td class="transfer"><?php echo $myFoundReport['doc_createdDate'] ?></td>
-                                <?php
+                        <tr>
+                            <td class="order-id text-primary"><?php echo $counter; ?> </td>
+                            <td class="job-name"><a><?php echo $myFoundReport['doc_fullnames'] ?></a></td>
+                            <td class="amount text-primary"><?php echo $myFoundReport['doc_serialcode'] ?></td>
+                            <td class="date"><?php echo $myFoundReport['doctype_name'] ?></td>
+                            <td class="transfer"><?php echo $myFoundReport['doc_createdDate'] ?></td>
+                            <?php
                                 if ($myFoundReport['doc_status'] == 0) {
                                 ?>
-                                    <td class="expired pending">Not found</td>
-                                <?php } elseif ($myFoundReport['doc_status'] == 9) {
+                            <!-- <td class="expired pending">Not found</td> -->
+                            <?php } elseif ($myFoundReport['doc_status'] == 9) {
                                 ?>
-                                    <td class="expired pending">Not found</td>
-                                <?php } ?>
-                            </tr>
+                            <!-- <td class="expired pending">Not found</td> -->
+                            <?php } ?>
+                        </tr>
                         <?php $counter++;
                         } ?>
                     </tbody>

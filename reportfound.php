@@ -24,6 +24,7 @@ require 'inc/css.php';
                                 <div class="col-lg-8">
                                     <?php
                                     if (isset($_POST['reportFound'])) {
+                                        
                                         $folder  = 'access/files/';
                                         @$repoName = escape($_POST['docName']);
                                         @$repoId   = escape($_POST['docId']);

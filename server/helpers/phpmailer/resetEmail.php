@@ -17,8 +17,8 @@ function resetpasswordmail($userEmail, $userBody, $userSubject)
       $mail->isSMTP();                                      // Set mailer to use SMTP
       $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
       $mail->SMTPAuth = true;                               // Enable SMTP authentication
-      $mail->Username = 'emateduc250@gmail.com';                 // SMTP username
-      $mail->Password = 'Emate250@git';                           // SMTP password
+      $mail->Username = 'lostfoundrwanda@gmail.com';                 // SMTP username
+      $mail->Password = 'lostfound123';                           // SMTP password
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;                              // Enable TLS encryption, `ssl` also accepted
       $mail->Port = 465;                                    // TCP port to connect to
 

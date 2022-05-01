@@ -213,7 +213,7 @@ function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $use
                   $userLast  = $similar['cli_lname'];
                   $userIde   = $similar['cli_id'];
                 endforeach;
-                $message = "Hello " . $userFirst . ' ' . $userLast . " Someone have reported a document with the same information as what you have claimed to lost , Please visit our system to verify if it is yours";
+                $message = "Hello " . $userFirst . ' ' . $userLast . "the documents you have reported  have already found in our system, Please check for best match and claim for it, if it is yours";
                 # IF USER FOUND ,SEND SMS NOTIFICATION 
                 sendSms($userPhone, $message);
                 echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -233,7 +233,7 @@ function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $use
               }
             } elseif ($countDocId) {
               return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
->>>>>>> ce0c94af842f84bca1a185687f08ba67f9be823d
+              >>>>>>> ce0c94af842f84bca1a185687f08ba67f9be823d
             <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>

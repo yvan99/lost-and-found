@@ -123,8 +123,9 @@ require 'inc/css.php';
 
             <!-- Create Account END -->
 
-            <?php require 'inc/footer.php'; ?>
+            <?php require 'inc/footer.php' ?>
         </div>
 
 
         <?php require 'inc/js.php'; ?>
+            

@@ -74,7 +74,7 @@ if (!$_SESSION['clientIdLost']) {
                             <th>Document owner names</th>
                             <th>Document Number</th>
                             <th>Document type</th>
-                            <th>Lost date</th>
+                            <th>Found date</th>
                             <!-- <th>Status</th> -->
                         </tr>
                     </thead>

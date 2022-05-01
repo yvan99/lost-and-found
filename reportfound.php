@@ -123,6 +123,7 @@ require 'inc/css.php';
                                         <h6 class="font-14">Stay tuned
                                         </h6>
                                         <p class="m-b10">Lost and found here for our people</p>
+                                        <p class="m-b10">If there is any problem call us on <b>0780859910</b></p>
 
                                     </div>
                                 </div>

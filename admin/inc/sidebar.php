@@ -48,6 +48,12 @@
                             <span class="nav-link-text">Logistic agents</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="totalclients">
+                            <i class="ni ni-circle-08 text-black"></i>
+                            <span class="nav-link-text">List of clients</span>
+                        </a>
+                    </li>
          
                 </ul>
                 <!-- Divider -->

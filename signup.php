@@ -58,13 +58,13 @@ require 'inc/server.php';
 								<div class="row">
 									<div class="form-group col-6">
 										<label class="font-weight-700">E-MAIL *</label>
-										<input name="email" class="form-control" type="text">
+										<input name="email" class="form-control" type="Email">
 									</div>
 
 
 									<div class="form-group col-6">
 										<label class="font-weight-700">Phone number</label>
-										<input name="phone" class="form-control" type="text">
+										<input name="phone" class="form-control" type="text" pattern="07[2,3,8]{1}[0-9]{7}" required>
 									</div>
 								</div>
 								<div class="row">

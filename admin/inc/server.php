@@ -13,6 +13,7 @@ if (!$_SESSION['adminIdLost']) {
     $countBranches = countAffectedRows('branch', "1");
     $countLost = countAffectedRows('document_lost', "1");
     $countFound = countAffectedRows('document_found', "1");
+    $countClient =countAffectedRows('client',"1");
     $countAgents = countAffectedRows('agent', "1");
     $countClaims = countAffectedRows('claim', "1");
     $pendingClaims = countAffectedRows('claim', "claim_status='PENDING'");

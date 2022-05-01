@@ -108,8 +108,7 @@ require 'inc/css.php';
                                             </div>
                                             <div class="col-lg-12 text-center">
                                                 <a href="./" class="btn btn-dark">Return home</a>
-                                                <button class="site-button" type="submit" name="reportLost">Report
-                                                    Now</button>
+                                                <button class="site-button" type="submit" name="reportLost">Report Now</button>
                                             </div>
                                         </div>
                                     </form>
@@ -124,20 +123,12 @@ require 'inc/css.php';
                                             <li>You will be notified in case your documents are found</li>
                                         </ul>
                                         <div class="dez-divider bg-gray-dark"></div>
-<<<<<<< HEAD
+
                                         <h6 class="font-14">Stay tuned</h6>
                                         <p class="m-b10">Lost and found here for our people</p>
-=======
-                                        <h6 class="font-14">Why <a href="../cdn-cgi/l/email-protection.html"
-                                                class="__cf_email__"
-                                                data-cfemail="aec7c0c8c1eecbd6cfc3dec2cb80cdc1c3">[email&#160;protected]</a>
-                                        </h6>
-                                        <p class="m-b10"><strong class="text-black m-r10">800,000+ </strong> Jobs</p>
-                                        <p class="m-b10"><strong class="text-black m-r10">100,000+</strong> CV searches
-                                            daily</p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry has
-                                            been the industry.</p>
->>>>>>> ce0c94af842f84bca1a185687f08ba67f9be823d
+                                        <p class="m-b10">If there is any problem call us on <b>0780859910<b></p>
+                                        
+
                                     </div>
                                 </div>
                             </div>

@@ -233,7 +233,6 @@ function reportLost($repoName, $repoId, $repoType, $repoAddress, $repoDate, $use
               }
             } elseif ($countDocId) {
               return   '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-              >>>>>>> ce0c94af842f84bca1a185687f08ba67f9be823d
             <strong> Document is already reported </strong> <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">×</span>
             </button>

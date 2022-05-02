@@ -23,7 +23,7 @@ function resetpasswordmail($userEmail, $userBody, $userSubject)
       $mail->Port = 465;                                    // TCP port to connect to
 
       //Recipients
-      $mail->setFrom('emateduc250@gmail.com', 'lost and found');
+      $mail->setFrom('lostfoundrwanda@gmail.com', 'lost and found');
       $mail->addAddress($userEmail);     // Add a recipient
       $body = $userBody;
 

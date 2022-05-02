@@ -30,8 +30,8 @@
 									# code...
 								}
 							?>
-	                        <button class="btn btn-warning"> <i class="fa fa-user"></i>
-	                            <?php echo strtoupper($user['cli_fname'] . ' ' . $user['cli_lname']) ?></button>
+	                        <a href="profile" class="btn btn-warning"> <i class="fa fa-user"></i>
+	                            <?php echo strtoupper($user['cli_fname'] . ' ' . $user['cli_lname']) ?></a>
 	                        <a class="btn btn-danger" href="logout"> <i class="fa fa-power"></i> Logout</a>
 	                        <?php } else { ?>
 	                        <a href="signup" class="btn btn-warning"><i class="fa fa-user"></i> Sign Up</a>

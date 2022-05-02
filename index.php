@@ -93,6 +93,73 @@ require 'inc/css.php';
 
 
         </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Register new logistics agent</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row">
+
+
+                                <input class="form-control" type="text" name="agcode" hidden
+                                    value="<?php echo 'AG' . verificationToken(); ?>">
+
+
+                                <div class="form-group col-md-6">
+                                    <label for="example-text-input" class="form-control-label">Enter full names</label>
+                                    <input class="form-control" type="text" name="agnames" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="example-text-input" class="form-control-label">Enter valid telephone
+                                        number</label>
+                                    <input class="form-control" type="text" name="agtelephone" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label for="example-text-input" class="form-control-label">Enter address</label>
+                                    <input class="form-control" type="text" name="agaddress" required>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="form-control-label" for="input-city">Select branch</label>
+
+                                    <select name="agbranch" class='form-control'>
+                                        <option selected>Choose branch</option>
+                                        <?php $sel = select('*', 'branch', "1");
+                                        foreach ($sel as $branch) :
+                                        ?>
+                                        <option value="<?php echo  $branch['bra_id'] ?>">
+                                            <?php echo  $branch['bra_name'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" name="saveLogistics" class="btn btn-success">Save Logistic agent</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
         <!-- Content END-->
         <?php require 'inc/footer.php' ?>
         <!-- scroll top button -->

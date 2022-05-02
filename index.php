@@ -16,8 +16,7 @@ require 'inc/css.php';
                     <div class="dez-bnr-inr-entry align-m">
                         <div class="find-job-bx">
 
-                            <a href="javascript:void(0);" class="button-lg offset-3 btn-warning rounded mb-2">Lost and
-                                Found Management Information System</a>
+                            <a href="javascript:void(0);" class="button-lg offset-3 btn-warning rounded mb-2">Document Recovery Management Information System</a>
                             <h4 class="text-white offset-4 mt-5"> <img src="assets/homepage/images/icons/search.png"
                                     alt=""> Find your document</h2>
                                 <form class="dezPlaceAni offset-2" method="POST">

@@ -50,7 +50,7 @@
 	                                alt=""></a>
 	                    </div>
 	                    <ul class="nav navbar-nav">
-	                        <li class="active">
+	                        <li>
 	                            <a href="./">Home</a>
 
 	                        </li>

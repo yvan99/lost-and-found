@@ -6,7 +6,14 @@ if (!$_SESSION['clientIdLost']) {
     header('location:logout');
 }
 ?>
-
+<style>
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+ 
+}
+</style>
 <body id="bg">
     <!-- <div id="loading-area"></div> -->
     <div class="page-wraper">
@@ -64,8 +71,10 @@ if (!$_SESSION['clientIdLost']) {
     </div>
     </div>
     <!-- Content END-->
-    <?php //require 'inc/footer.php' 
+    <div  class="footer">
+    <?php require 'inc/footer.php' 
     ?>
+    </div>
     <!-- scroll top button -->
     <button class="scroltop fa fa-arrow-up"></button>
     </div>

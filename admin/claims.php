@@ -24,7 +24,7 @@ require_once 'inc/server.php';
                                         <div class="row">
                                             <div class="col">
                                                 <h5 class="card-title text-uppercase text-muted mb-0">Total claims</h5>
-                                                <span class="h2 font-weight-bold mb-0"><?php echo $countFound ?></span>
+                                                <span class="h2 font-weight-bold mb-0"><?php echo $countClaims ?></span>
                                             </div>
                                             <div class="col-auto">
                                                 <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">

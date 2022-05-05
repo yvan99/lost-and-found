@@ -112,10 +112,10 @@ if(isset($_POST['update'])){
                                     <div class="p-a25">
                                         <h6>Report your lost document</h6>
                                         <ul class="list-check primary">
-                                            <li>Make sure you have searched it before to see if it is not yet found</li>
-                                            <li>Provide correct information</li>
-                                            <li>Report a document of which you have a proof that it is yours</li>
-                                            <li>You will be notified in case your documents are found</li>
+                                            <li>make sure you provide active account</li>
+                                            <li>Provide correct mobile number</li>
+                                            <li>any change will be kept safely</li>
+                                           
                                         </ul>
                                         <div class="dez-divider bg-gray-dark"></div>
 

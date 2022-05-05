@@ -3,6 +3,14 @@ require 'inc/server.php';
 require 'inc/userCheck.php';
 require 'inc/css.php';
 ?>
+<style>
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+ 
+}
+</style>
 <body id="bg">
     <div id="loading-area"></div>
     <div class="page-wraper">
@@ -122,8 +130,8 @@ require 'inc/css.php';
 
 
             <!-- Create Account END -->
-
-            <?php require 'inc/footer.php' ?>
+<div class="footer">
+            <?php require 'inc/footer.php' ?></div>
         </div>
 
 
